@@ -87,7 +87,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://139.59.228.145:4000/listUsers?key=$sessionKey'),
+        Uri.parse('http://157.245.159.165:4001/listUsers?key=$sessionKey'),
       );
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
@@ -127,7 +127,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://139.59.228.145:4000/deleteUser?key=$sessionKey&username=$username'),
+        Uri.parse('http://157.245.159.165:4001/deleteUser?key=$sessionKey&username=$username'),
       );
       final data = jsonDecode(res.body);
       if (data['deleted'] == true) {
@@ -156,7 +156,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final url = Uri.parse(
-        'http://139.59.228.145:4000/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole',
+        'http://157.245.159.165:4001/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole',
       );
       final res = await http.get(url);
       final data = jsonDecode(res.body);

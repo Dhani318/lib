@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'splash.dart';
 
-const String baseUrl = "http://139.59.228.145:4000";
+const String baseUrl = "http://157.245.159.165:4001";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

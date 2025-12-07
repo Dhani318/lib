@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const String baseUrl = "http://139.59.228.145:4000";
+const String baseUrl = "http://157.245.159.165:4001";
 
 class ChangePasswordPage extends StatefulWidget {
   final String username;

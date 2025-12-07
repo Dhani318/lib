@@ -327,7 +327,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                               ),
                               side: BorderSide.none,
                             ),
-                            onPressed: () => _openUrl("https://t.me/EdrikAnakBaik1"),
+                            onPressed: () => _openUrl("https://t.me/shivcodeee"),
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

