@@ -123,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage>
 void _connectToWebSocket() async {
   try {
     final validateResponse = await http.post(
-      Uri.parse('http://143.110.183.107:3000/validate'),
+      Uri.parse('http://139.59.228.145:4000/validate'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "type": "validate",
@@ -148,7 +148,7 @@ void _connectToWebSocket() async {
     }
 
     final statsResponse = await http.post(
-      Uri.parse('http://143.110.183.107:3000/stats'),
+      Uri.parse('http://139.59.228.145:4000/stats'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"type": "stats"}),
     );
@@ -348,7 +348,7 @@ void _connectToWebSocket() async {
                       ),
                     ),
                     Text(
-                      "TR4SVLOID DASHBOARD",
+                      "Toxic Avenger Dashboard",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -744,7 +744,7 @@ void _connectToWebSocket() async {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "TR4SVLOID",
+                  "Toxic Avenger",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -985,7 +985,7 @@ void _connectToWebSocket() async {
       backgroundColor: primaryDark,
       appBar: AppBar(
         title: const Text(
-          "TR4SVLOID",
+          "Toxic Avenger",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

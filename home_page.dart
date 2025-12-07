@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     try {
       final res = await http.get(Uri.parse(
-          "http://143.110.183.107:3000/sendBug?key=$key&target=$target&bug=$selectedBugId"));
+          "http://139.59.228.145:4000/sendBug?key=$key&target=$target&bug=$selectedBugId"));
       final data = jsonDecode(res.body);
 
       if (data["cooldown"] == true) {

@@ -88,7 +88,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
     });
 
     final res = await http.get(Uri.parse(
-        "http://143.110.183.107:3000/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
+        "http://139.59.228.145:4000/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
     final data = jsonDecode(res.body);
 
     if (data['created'] == true) {
@@ -119,7 +119,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
     });
 
     final res = await http.get(Uri.parse(
-        "http://143.110.183.107:3000/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
+        "http://139.59.228.145:4000/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
     final data = jsonDecode(res.body);
 
     if (data['edited'] == true) {

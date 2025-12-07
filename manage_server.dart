@@ -76,7 +76,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
   Future<void> _fetchVpsList() async {
     setState(() => isLoading = true);
-    final uri = Uri.parse('http://143.110.183.107:3000/myServer?key=${widget.keyToken}');
+    final uri = Uri.parse('http://139.59.228.145:4000/myServer?key=${widget.keyToken}');
     try {
       final res = await http.get(uri);
       final data = jsonDecode(res.body);
@@ -102,7 +102,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
     setState(() => isAdding = true);
     Navigator.pop(context);
 
-    final uri = Uri.parse('http://143.110.183.107:3000/addServer');
+    final uri = Uri.parse('http://139.59.228.145:4000/addServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,
@@ -134,7 +134,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
     if (!confirmed) return;
 
-    final uri = Uri.parse('http://143.110.183.107:3000/delServer');
+    final uri = Uri.parse('http://139.59.228.145:4000/delServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,

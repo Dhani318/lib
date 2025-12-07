@@ -50,7 +50,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
 
     try {
       final response = await http.get(
-        Uri.parse("http://143.110.183.107:3000/mySender?key=${widget.sessionKey}"),
+        Uri.parse("http://139.59.228.145:4000/mySender?key=${widget.sessionKey}"),
         headers: {'Content-Type': 'application/json'},
       );
 
@@ -212,7 +212,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
 
     try {
       final response = await http.get(
-        Uri.parse("http://143.110.183.107:3000/getPairing?key=${widget.sessionKey}&number=$number"),
+        Uri.parse("http://139.59.228.145:4000/getPairing?key=${widget.sessionKey}&number=$number"),
       );
 
       if (response.statusCode == 200) {
@@ -458,7 +458,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
       try {
         // Ganti dengan endpoint delete yang sesuai
         final response = await http.delete(
-          Uri.parse("http://143.110.183.107:3000/deleteSender?key=${widget.sessionKey}&id=$senderId"),
+          Uri.parse("http://139.59.228.145:4000/deleteSender?key=${widget.sessionKey}&id=$senderId"),
         );
 
         if (response.statusCode == 200) {

@@ -137,7 +137,7 @@ class _SplashScreenState extends State<SplashScreen>
           Positioned(
             bottom: 80,
             child: Text(
-              "TR4SVLOID",
+              "Toxic Avenger",
               style: TextStyle(
                 fontSize: 42,
                 fontWeight: FontWeight.bold,

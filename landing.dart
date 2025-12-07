@@ -243,7 +243,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                             ),
                                           ),
                                           child: const Text(
-                                            "TR4SVLOID",
+                                            "Toxic Avenger",
                                             style: TextStyle(
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold,
@@ -380,18 +380,14 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                         children: [
                           _buildSocialButton(
                             icon: FontAwesomeIcons.telegram,
-                            url: "https://t.me/EdrikAnakBaik1",
+                            url: "https://t.me/shivcodeee",
                           ),
                           const SizedBox(width: 16),
-                          _buildSocialButton(
-                            icon: FontAwesomeIcons.tiktok,
-                            url: "https://tiktok.com/@akuedrik1",
-                          ),
                         ],
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        "© 2025 TR4SVLOID",
+                        "© 2025 TOXIC AVENGER",
                         style: TextStyle(
                           color: Colors.white38,
                           fontSize: 12,

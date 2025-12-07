@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'splash.dart';
 
-const String baseUrl = "http://143.110.183.107:3000";
+const String baseUrl = "http://139.59.228.145:4000";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage>
           if (showContact)
             TextButton(
               onPressed: () async {
-                await launchUrl(Uri.parse("https://t.me/EdrikAnakBaik1"),
+                await launchUrl(Uri.parse("https://t.me/shivcodeee"),
                     mode: LaunchMode.externalApplication);
               },
               child: const Text(
@@ -345,7 +345,7 @@ class _LoginPageState extends State<LoginPage>
 
                       // Title
                       const Text(
-                        "TR4SVLOID",
+                        "Toxic Avenger",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
