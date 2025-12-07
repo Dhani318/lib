@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   void _initializeVideoPlayer() {
     _videoController = VideoPlayerController.asset(
-      'assets/videos/banner.mp4',
+      'assets/videos/splash.mp4',
     );
 
     _videoController.initialize().then((_) {
@@ -408,7 +408,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget _buildVideoSection() {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 300,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: cardDark,

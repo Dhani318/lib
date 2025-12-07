@@ -100,10 +100,10 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.7),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.blue.withOpacity(0.2), width: 1),
+            border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.red.withOpacity(0.1),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
@@ -121,7 +121,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.1),
+                          color: Colors.red.withOpacity(0.1),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.add_circle, color: Colors.white),
@@ -145,12 +145,12 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       labelText: "Phone Number",
-                      labelStyle: TextStyle(color: Colors.blue.withOpacity(0.7)),
+                      labelStyle: TextStyle(color: Colors.red.withOpacity(0.7)),
                       hintText: "62xxx",
-                      hintStyle: TextStyle(color: Colors.blue.withOpacity(0.5)),
+                      hintStyle: TextStyle(color: Colors.red.withOpacity(0.5)),
                       prefixIcon: const Icon(Icons.phone, color: Colors.white),
                       filled: true,
-                      fillColor: Colors.blue.withOpacity(0.1),
+                      fillColor: Colors.red.withOpacity(0.1),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                         borderSide: BorderSide.none,
@@ -171,12 +171,12 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                       const SizedBox(width: 16),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.withOpacity(0.2),
+                          backgroundColor: Colors.red.withOpacity(0.2),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: Colors.blue.withOpacity(0.3)),
+                            side: BorderSide(color: Colors.red.withOpacity(0.3)),
                           ),
                         ),
                         onPressed: () async {
@@ -245,10 +245,10 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.7),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.blue.withOpacity(0.2), width: 1),
+            border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.red.withOpacity(0.1),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
@@ -264,7 +264,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
+                      color: Colors.red.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.qr_code_2, color: Colors.white, size: 50),
@@ -300,7 +300,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                      border: Border.all(color: Colors.red.withOpacity(0.3)),
                     ),
                     child: Text(
                       code,
@@ -336,12 +336,12 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                       const SizedBox(width: 16),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.withOpacity(0.2),
+                          backgroundColor: Colors.red.withOpacity(0.2),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: Colors.blue.withOpacity(0.3)),
+                            side: BorderSide(color: Colors.red.withOpacity(0.3)),
                           ),
                         ),
                         onPressed: () {
@@ -374,10 +374,10 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.7),
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.blue.withOpacity(0.2), width: 1),
+            border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withOpacity(0.1),
+                color: Colors.red.withOpacity(0.1),
                 blurRadius: 20,
                 spreadRadius: 5,
               ),
@@ -498,10 +498,10 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.3),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.blue.withOpacity(0.2), width: 1),
+        border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
+            color: Colors.red.withOpacity(0.1),
             blurRadius: 20,
             spreadRadius: 5,
           ),
@@ -561,7 +561,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                         Text(
                           number,
                           style: TextStyle(
-                            color: Colors.blue.withOpacity(0.7),
+                            color: Colors.red.withOpacity(0.7),
                             fontSize: 14,
                           ),
                         ),
@@ -597,7 +597,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
                       label: const Text("REFRESH"),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        side: BorderSide(color: Colors.blue.withOpacity(0.3)),
+                        side: BorderSide(color: Colors.red.withOpacity(0.3)),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -639,7 +639,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.blue.withOpacity(0.2), width: 1),
+              border: Border.all(color: Colors.red.withOpacity(0.2), width: 1),
             ),
             child: const Icon(
               Icons.phone_iphone,
@@ -661,7 +661,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           Text(
             "Add your first WhatsApp sender to get started",
             style: TextStyle(
-              color: Colors.blue.withOpacity(0.7),
+              color: Colors.red.withOpacity(0.7),
               fontSize: 16,
             ),
             textAlign: TextAlign.center,
@@ -671,12 +671,12 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
             icon: const Icon(Icons.add),
             label: const Text("ADD FIRST SENDER"),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue.withOpacity(0.2),
+              backgroundColor: Colors.red.withOpacity(0.2),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Colors.blue.withOpacity(0.3)),
+                side: BorderSide(color: Colors.red.withOpacity(0.3)),
               ),
             ),
             onPressed: _showAddSenderDialog,
@@ -718,7 +718,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           Text(
             errorMessage ?? "Unknown error occurred",
             style: TextStyle(
-              color: Colors.blue.withOpacity(0.7),
+              color: Colors.red.withOpacity(0.7),
               fontSize: 16,
             ),
             textAlign: TextAlign.center,
@@ -728,12 +728,12 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
             icon: const Icon(Icons.refresh),
             label: const Text("TRY AGAIN"),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue.withOpacity(0.2),
+              backgroundColor: Colors.red.withOpacity(0.2),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Colors.blue.withOpacity(0.3)),
+                side: BorderSide(color: Colors.red.withOpacity(0.3)),
               ),
             ),
             onPressed: _fetchSenders,
@@ -775,7 +775,7 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
           gradient: LinearGradient(
             colors: [
               Colors.black,
-              Colors.blue.withOpacity(0.05),
+              Colors.red.withOpacity(0.05),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -806,9 +806,9 @@ class _BugSenderPageState extends State<BugSenderPage> with TickerProviderStateM
       floatingActionButton: Container(
         margin: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
-          color: Colors.blue.withOpacity(0.2),
+          color: Colors.red.withOpacity(0.2),
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.blue.withOpacity(0.3), width: 1),
+          border: Border.all(color: Colors.red.withOpacity(0.3), width: 1),
         ),
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,

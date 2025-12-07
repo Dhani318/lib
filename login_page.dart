@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF2E1A1A),
+        backgroundColor: Colors.red,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Text(
           title,
@@ -255,7 +255,7 @@ class _LoginPageState extends State<LoginPage>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.teal.withOpacity(0.1),
+                          color: Colors.red.withOpacity(0.1),
                           width: 2,
                         ),
                       ),
@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.blue.withOpacity(0.1),
+                          color: Colors.red.withOpacity(0.1),
                           width: 2,
                         ),
                       ),
@@ -300,7 +300,7 @@ class _LoginPageState extends State<LoginPage>
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.teal.withOpacity(0.3),
+                      color: Colors.red.withOpacity(0.3),
                       width: 1,
                     ),
                     boxShadow: [
@@ -321,7 +321,7 @@ class _LoginPageState extends State<LoginPage>
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
-                            colors: [Colors.teal, Colors.blue],
+                            colors: [Colors.red],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -406,7 +406,7 @@ class _LoginPageState extends State<LoginPage>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.teal,
+                  color: Colors.red,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -419,7 +419,7 @@ class _LoginPageState extends State<LoginPage>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.red,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -443,7 +443,7 @@ class _LoginPageState extends State<LoginPage>
         decoration: InputDecoration(
           hintText: label,
           hintStyle: const TextStyle(color: Colors.white38),
-          prefixIcon: Icon(icon, color: Colors.teal.withOpacity(0.7)),
+          prefixIcon: Icon(icon, color: Colors.red.withOpacity(0.7)),
           suffixIcon: isPassword
               ? IconButton(
             icon: Icon(
@@ -467,14 +467,14 @@ class _LoginPageState extends State<LoginPage>
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color: Colors.teal.withOpacity(0.3),
+              color: Colors.red.withOpacity(0.3),
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
-              color: Colors.teal,
+              color: Colors.red,
               width: 2,
             ),
           ),
@@ -491,7 +491,7 @@ class _LoginPageState extends State<LoginPage>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
-          colors: [Colors.teal, Colors.blue],
+          colors: [Colors.red],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),

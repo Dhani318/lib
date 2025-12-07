@@ -271,7 +271,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: const Colors.redAccent.withOpacity.withOpacity(0.4),
+                                color: Colors.redAccent.withOpacity(0.4),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -279,7 +279,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                           ),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF3949AB),
+                              backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -315,13 +315,13 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: const Color(0xFF5C6BC0),
+                              color: Colors.red,
                               width: 2,
                             ),
                           ),
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: const Color(0xFF5C6BC0),
+                              foregroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
@@ -423,7 +423,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
       child: IconButton(
         icon: FaIcon(
           icon,
-          color: const Color(0xFF5C6BC0),
+          color: Colors.red,
           size: 20,
         ),
         onPressed: () => _openUrl(url),

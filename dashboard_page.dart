@@ -70,11 +70,11 @@ class _DashboardPageState extends State<DashboardPage>
   // Warna tema hitam biru
   final Color primaryDark = Color(0xFF270A0A);
   final Color primaryBlue = Color(0xFF8A1E1E);
-  final Color accentBlue = Color(0xFF270A0A);
+  final Color accentBlue = Color(0xFFF63B3B);
   final Color lightBlue = Color(0xFFFA6060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color cardDark = Color(0xFF151932);
+  final Color cardDark = Color(0xFF1A0A0A);
   final Color cardDarker = Color(0xFF0F1330);
   final Color blueGradientStart = Color(0xFF8A1E1E);
   final Color blueGradientEnd = Color(0xFFF63B3B);
@@ -348,7 +348,7 @@ void _connectToWebSocket() async {
                       ),
                     ),
                     Text(
-                      "TR4SVLOID Dashboard",
+                      "TR4SVLOID DASHBOARD",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

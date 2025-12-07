@@ -220,7 +220,7 @@ class _HomeAnimePageState extends State<HomeAnimePage> {
           _loadWatchHistory(),
         ]);
       },
-      color: Colors.blue,
+      color: Colors.red,
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -335,7 +335,7 @@ class _HomeAnimePageState extends State<HomeAnimePage> {
   Widget _buildSectionHeader(IconData icon, String title) {
     return Row(
       children: [
-        Icon(icon, color: Colors.blue, size: 24),
+        Icon(icon, color: Colors.red, size: 24),
         const SizedBox(width: 8),
         Text(
           title,
@@ -613,7 +613,7 @@ class _HomeAnimePageState extends State<HomeAnimePage> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Colors.red,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
@@ -1146,7 +1146,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.red,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
@@ -1217,7 +1217,7 @@ class _AnimeDetailPageState extends State<AnimeDetailPage> {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Colors.red,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Center(
@@ -1752,7 +1752,7 @@ class _AnimeGenrePageState extends State<AnimeGenrePage> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Colors.red,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
@@ -1931,7 +1931,7 @@ class _AnimeSchedulePageState extends State<AnimeSchedulePage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Colors.red,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
@@ -2653,7 +2653,7 @@ class _AnimeEpisodePageState extends State<AnimeEpisodePage> with WidgetsBinding
   Widget _getProviderIcon(String provider) {
     switch (provider.toLowerCase()) {
       case 'odfiles':
-        return const Icon(Icons.storage, color: Colors.blue, size: 20);
+        return const Icon(Icons.storage, color: Colors.red, size: 20);
       case 'pdrain':
         return const Icon(Icons.cloud_download, color: Colors.green, size: 20);
       case 'acefile':
@@ -2782,7 +2782,7 @@ class _AnimeEpisodePageState extends State<AnimeEpisodePage> with WidgetsBinding
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(
-                          color: Colors.blue,
+                          color: Colors.red,
                         ),
                         SizedBox(height: 16),
                         Text(
@@ -2857,7 +2857,7 @@ class _AnimeEpisodePageState extends State<AnimeEpisodePage> with WidgetsBinding
     final isSelected = _currentTabIndex == index;
     return Expanded(
       child: Material(
-        color: isSelected ? Colors.blue : Colors.transparent,
+        color: isSelected ? Colors.red : Colors.transparent,
         child: InkWell(
           onTap: () {
             setState(() {
@@ -2937,7 +2937,7 @@ class _AnimeEpisodePageState extends State<AnimeEpisodePage> with WidgetsBinding
                 margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                 decoration: BoxDecoration(
                   color: isCurrentEpisode
-                      ? Colors.blue
+                      ? Colors.red
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -3169,7 +3169,7 @@ class _AnimeEpisodePageState extends State<AnimeEpisodePage> with WidgetsBinding
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.red,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
@@ -3276,7 +3276,7 @@ Widget _buildQuickAccessCard(String title, IconData icon, VoidCallback onTap) {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Icon(icon, color: Colors.blue, size: 32),
+            Icon(icon, color: Colors.red, size: 32),
             const SizedBox(height: 8),
             Text(
               title,

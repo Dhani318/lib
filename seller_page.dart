@@ -480,7 +480,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
                   ],
                   onPressed: _edit,
                   buttonText: "UPDATE DURATION",
-                  buttonColor: successGreen,
+                  buttonColor: accentBlue,
                 ),
               ],
             ),
