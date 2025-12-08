@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NglPage extends StatefulWidget {
   const NglPage({super.key});
@@ -26,15 +27,14 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
   late Animation<double> _pulseAnimation;
   late Animation<Offset> _slideAnimation;
 
-  // Warna tema hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color cardDark = const Color(0xFF151937); // Biru gelap card
-  final Color glassColor = const Color(0x1FFFFFFF); // Warna kaca transparan
+  final Color cardDark = const Color(0xFF151937);
+  final Color glassColor = const Color(0x1FFFFFFF);
 
   @override
   void initState() {
@@ -69,14 +69,13 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  // generate deviceId random
   String generateDeviceId(int length) {
     final random = Random.secure();
     return List.generate(length, (_) => random.nextInt(16).toRadixString(16)).join();
   }
 
   Future<void> sendMessage(String username, String message) async {
-    final deviceId = generateDeviceId(42); // crypto.randomBytes(21) -> hex = 42 panjang
+    final deviceId = generateDeviceId(42);
     final url = Uri.parse("https://ngl.link/api/submit");
 
     final headers = {
@@ -134,7 +133,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
       statusLog = "▶️ Mulai mengirim...";
     });
 
-    // Loop auto setiap 2 detik
     timer = Timer.periodic(const Duration(seconds: 2), (_) {
       if (isRunning) {
         sendMessage(username, message);
@@ -157,10 +155,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
       backgroundColor: primaryDark,
       body: Stack(
         children: [
-          // Background dengan efek animasi
           _buildAnimatedBackground(),
-
-          // Konten utama
           SafeArea(
             child: SlideTransition(
               position: _slideAnimation,
@@ -168,22 +163,12 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    // Header dengan desain baru
                     _buildNewHeader(),
-
                     const SizedBox(height: 20),
-
-                    // Input Section dengan desain baru
                     _buildNewInputSection(),
-
                     const SizedBox(height: 20),
-
-                    // Control Buttons dengan desain baru
                     _buildNewControlButtons(),
-
                     const SizedBox(height: 20),
-
-                    // Status Section dengan desain baru
                     _buildNewStatusSection(),
                   ],
                 ),
@@ -213,7 +198,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
           ),
           child: Stack(
             children: [
-              // Partikel animasi
               ...List.generate(15, (index) {
                 final top = (_pulseController.value + index * 0.07) % 1.0;
                 final left = (index * 0.13) % 1.0;
@@ -227,11 +211,11 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                     width: size,
                     height: size,
                     decoration: BoxDecoration(
-                      color: lightBlue.withOpacity(opacity),
+                      color: lightOrange.withOpacity(opacity),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: lightBlue.withOpacity(opacity * 0.5),
+                          color: lightOrange.withOpacity(opacity * 0.5),
                           blurRadius: size,
                           spreadRadius: size / 2,
                         ),
@@ -240,8 +224,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   ),
                 );
               }),
-
-              // Efek cahaya
               Positioned(
                 top: -150,
                 right: -150,
@@ -257,7 +239,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              accentBlue.withOpacity(0.15),
+                              accentOrange.withOpacity(0.15),
                               Colors.transparent,
                             ],
                           ),
@@ -295,7 +277,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
       ),
       child: Row(
         children: [
-          // Logo dengan animasi pulse
           AnimatedBuilder(
             animation: _pulseAnimation,
             builder: (context, child) {
@@ -306,21 +287,21 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   height: 50,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.4),
+                        color: accentOrange.withOpacity(0.4),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
                     ],
                   ),
                   child: const Icon(
-                    Icons.send,
+                    FontAwesomeIcons.paperPlane,
                     color: Colors.white,
                     size: 30,
                   ),
@@ -328,10 +309,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
               );
             },
           ),
-
           const SizedBox(width: 16),
-
-          // Judul
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -349,7 +327,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                 Text(
                   "Automated Message System",
                   style: TextStyle(
-                    color: lightBlue,
+                    color: lightOrange,
                     fontSize: 14,
                     fontFamily: 'ShareTechMono',
                   ),
@@ -357,8 +335,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
               ],
             ),
           ),
-
-          // Status indikator
           Container(
             width: 12,
             height: 12,
@@ -399,13 +375,12 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
       ),
       child: Column(
         children: [
-          // Username Input
           Container(
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: accentBlue.withOpacity(0.3),
+                color: accentOrange.withOpacity(0.3),
                 width: 1,
               ),
             ),
@@ -414,25 +389,22 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
               style: TextStyle(color: primaryWhite, fontSize: 16),
               decoration: InputDecoration(
                 labelText: "Username NGL",
-                labelStyle: TextStyle(color: lightBlue),
+                labelStyle: TextStyle(color: lightOrange),
                 hintText: "contoh: username_ngl",
                 hintStyle: TextStyle(color: accentGrey),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                prefixIcon: Icon(Icons.person, color: lightBlue),
+                prefixIcon: Icon(FontAwesomeIcons.user, color: lightOrange),
               ),
             ),
           ),
-
           const SizedBox(height: 16),
-
-          // Message Input
           Container(
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: accentBlue.withOpacity(0.3),
+                color: accentOrange.withOpacity(0.3),
                 width: 1,
               ),
             ),
@@ -441,12 +413,12 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
               style: TextStyle(color: primaryWhite, fontSize: 16),
               decoration: InputDecoration(
                 labelText: "Pesan",
-                labelStyle: TextStyle(color: lightBlue),
+                labelStyle: TextStyle(color: lightOrange),
                 hintText: "Masukkan pesan yang ingin dikirim...",
                 hintStyle: TextStyle(color: accentGrey),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                prefixIcon: Icon(Icons.message, color: lightBlue),
+                prefixIcon: Icon(FontAwesomeIcons.message, color: lightOrange),
               ),
               maxLines: 3,
             ),
@@ -459,7 +431,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
   Widget _buildNewControlButtons() {
     return Row(
       children: [
-        // Start Button
         Expanded(
           child: GestureDetector(
             onTap: isRunning ? null : startLoop,
@@ -473,7 +444,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   end: Alignment.bottomRight,
                 )
                     : LinearGradient(
-                  colors: [primaryBlue, accentBlue],
+                  colors: [primaryOrange, accentOrange],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -482,7 +453,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   BoxShadow(
                     color: isRunning
                         ? Colors.transparent
-                        : accentBlue.withOpacity(0.4),
+                        : accentOrange.withOpacity(0.4),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -493,7 +464,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.play_arrow,
+                      FontAwesomeIcons.play,
                       color: primaryWhite,
                       size: 24,
                     ),
@@ -513,10 +484,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
             ),
           ),
         ),
-
         const SizedBox(width: 16),
-
-        // Stop Button
         Expanded(
           child: GestureDetector(
             onTap: isRunning ? stopLoop : null,
@@ -550,7 +518,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.stop,
+                      FontAwesomeIcons.stop,
                       color: primaryWhite,
                       size: 24,
                     ),
@@ -595,12 +563,11 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
         ),
         child: Column(
           children: [
-            // Status Header
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [primaryBlue, accentBlue],
+                  colors: [primaryOrange, accentOrange],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
@@ -608,7 +575,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.info_outline, color: primaryWhite),
+                  Icon(FontAwesomeIcons.infoCircle, color: primaryWhite),
                   const SizedBox(width: 12),
                   Text(
                     "STATUS LOG",
@@ -622,10 +589,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                 ],
               ),
             ),
-
             const SizedBox(height: 16),
-
-            // Status Log
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(16),
@@ -633,7 +597,7 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   color: Colors.black.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: accentBlue.withOpacity(0.2),
+                    color: accentOrange.withOpacity(0.2),
                     width: 1,
                   ),
                 ),
@@ -655,37 +619,34 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-
             const SizedBox(height: 16),
-
-            // Counter
             if (counter > 0)
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      primaryBlue.withOpacity(0.2),
-                      accentBlue.withOpacity(0.1),
+                      primaryOrange.withOpacity(0.2),
+                      accentOrange.withOpacity(0.1),
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: accentBlue.withOpacity(0.3),
+                    color: accentOrange.withOpacity(0.3),
                     width: 1,
                   ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.send, color: lightBlue),
+                    Icon(FontAwesomeIcons.paperPlane, color: lightOrange),
                     const SizedBox(width: 12),
                     Text(
                       "Total terkirim: ",
                       style: TextStyle(
-                        color: lightBlue,
+                        color: lightOrange,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -702,8 +663,6 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-
-            // Info Box
             Container(
               margin: EdgeInsets.only(top: 16),
               padding: EdgeInsets.all(16),
@@ -711,13 +670,13 @@ class _NglPageState extends State<NglPage> with TickerProviderStateMixin {
                 color: Colors.black.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: accentBlue.withOpacity(0.2),
+                  color: accentOrange.withOpacity(0.2),
                   width: 1,
                 ),
               ),
               child: Row(
                 children: [
-                  Icon(Icons.warning_amber, color: lightBlue),
+                  Icon(FontAwesomeIcons.triangleExclamation, color: lightOrange),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(

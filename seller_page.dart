@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SellerPage extends StatefulWidget {
   final String keyToken;
@@ -25,15 +26,14 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
 
   @override
@@ -88,7 +88,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
     });
 
     final res = await http.get(Uri.parse(
-        "http://157.245.159.165:4001/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
+        "http://157.245.159.165:4000/createAccount?key=${widget.keyToken}&newUser=$u&pass=$p&day=$d"));
     final data = jsonDecode(res.body);
 
     if (data['created'] == true) {
@@ -119,7 +119,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
     });
 
     final res = await http.get(Uri.parse(
-        "http://157.245.159.165:4001/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
+        "http://157.245.159.165:4000/editUser?key=${widget.keyToken}&username=$u&addDays=$d"));
     final data = jsonDecode(res.body);
 
     if (data['edited'] == true) {
@@ -164,8 +164,8 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  color == successGreen ? Icons.check_circle :
-                  color == dangerRed ? Icons.error : Icons.info,
+                  color == successGreen ? FontAwesomeIcons.circleCheck :
+                  color == dangerRed ? FontAwesomeIcons.circleExclamation : FontAwesomeIcons.circleInfo,
                   color: color,
                   size: 20,
                 ),
@@ -228,7 +228,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: TextField(
             controller: controller,
@@ -236,7 +236,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
             obscureText: obscureText,
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              prefixIcon: Icon(icon, color: accentBlue),
+              prefixIcon: Icon(icon, color: accentOrange),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
@@ -253,7 +253,7 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
     required List<Widget> inputs,
     required VoidCallback onPressed,
     required String buttonText,
-    Color buttonColor = const Color(0xFF3B82F6),
+    Color buttonColor = const Color(0xFFF68300),
   }) {
     return Container(
       width: double.infinity,
@@ -384,20 +384,19 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Header Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.3),
+                        color: accentOrange.withOpacity(0.3),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -428,59 +427,57 @@ class _SellerPageState extends State<SellerPage> with TickerProviderStateMixin {
 
                 const SizedBox(height: 24),
 
-                // Create Account Card
                 _buildActionCard(
                   title: "Create New Account",
                   description: "Create a new user account with specified duration",
-                  icon: Icons.person_add,
+                  icon: FontAwesomeIcons.userPlus,
                   inputs: [
                     _buildModernInput(
                       label: "Username",
                       controller: _newUser,
-                      icon: Icons.person,
+                      icon: FontAwesomeIcons.user,
                     ),
                     const SizedBox(height: 16),
                     _buildModernInput(
                       label: "Password",
                       controller: _newPass,
-                      icon: Icons.lock,
+                      icon: FontAwesomeIcons.lock,
                       obscureText: true,
                     ),
                     const SizedBox(height: 16),
                     _buildModernInput(
                       label: "Duration (days)",
                       controller: _days,
-                      icon: Icons.calendar_today,
+                      icon: FontAwesomeIcons.calendarDays,
                       keyboardType: TextInputType.number,
                     ),
                   ],
                   onPressed: _create,
                   buttonText: "CREATE ACCOUNT",
-                  buttonColor: accentBlue,
+                  buttonColor: accentOrange,
                 ),
 
-                // Edit Duration Card
                 _buildActionCard(
                   title: "Extend Account Duration",
                   description: "Add more days to an existing user account",
-                  icon: Icons.update,
+                  icon: FontAwesomeIcons.clockRotateLeft,
                   inputs: [
                     _buildModernInput(
                       label: "Username",
                       controller: _editUser,
-                      icon: Icons.person,
+                      icon: FontAwesomeIcons.user,
                     ),
                     const SizedBox(height: 16),
                     _buildModernInput(
                       label: "Additional Days",
                       controller: _editDays,
-                      icon: Icons.add_circle,
+                      icon: FontAwesomeIcons.circlePlus,
                       keyboardType: TextInputType.number,
                     ),
                   ],
                   onPressed: _edit,
                   buttonText: "UPDATE DURATION",
-                  buttonColor: accentBlue,
+                  buttonColor: successGreen,
                 ),
               ],
             ),

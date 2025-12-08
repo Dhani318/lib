@@ -4,9 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'splash.dart';
 
-const String baseUrl = "http://157.245.159.165:4001";
+const String baseUrl = "http://157.245.159.165:4000";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -169,7 +170,7 @@ class _LoginPageState extends State<LoginPage>
       _showPopup(
         title: "⚠️ Connection Error",
         message: "Failed to connect to the server.\nPlease check your connection.",
-        color: Colors.teal,
+        color: Color(0xFFFF9800),
       );
     }
 
@@ -185,7 +186,7 @@ class _LoginPageState extends State<LoginPage>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color(0xFF1A1A2E),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         title: Text(
           title,
@@ -200,12 +201,12 @@ class _LoginPageState extends State<LoginPage>
           if (showContact)
             TextButton(
               onPressed: () async {
-                await launchUrl(Uri.parse("https://t.me/shivcodeee"),
+                await launchUrl(Uri.parse("https://t.me/Edrik_Reals01"),
                     mode: LaunchMode.externalApplication);
               },
               child: const Text(
                 "Contact Admin",
-                style: TextStyle(color: Colors.teal),
+                style: TextStyle(color: Color(0xFFFF9800)),
               ),
             ),
           TextButton(
@@ -233,14 +234,13 @@ class _LoginPageState extends State<LoginPage>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF600F0F), Color(0xFF3E1616), Color(0xFF600F0F)],
+            colors: [Color(0xFF1A0F00), Color(0xFF261700), Color(0xFF1A0F00)],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
           ),
         ),
         child: Stack(
           children: [
-            // Animated background elements
             Positioned(
               top: -100,
               left: -100,
@@ -255,7 +255,7 @@ class _LoginPageState extends State<LoginPage>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.red.withOpacity(0.1),
+                          color: Color(0xFFFF9800).withOpacity(0.1),
                           width: 2,
                         ),
                       ),
@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.red.withOpacity(0.1),
+                          color: Color(0xFFFF5722).withOpacity(0.1),
                           width: 2,
                         ),
                       ),
@@ -289,7 +289,6 @@ class _LoginPageState extends State<LoginPage>
               ),
             ),
 
-            // Main card
             Center(
               child: SlideTransition(
                 position: _slideAnim,
@@ -300,7 +299,7 @@ class _LoginPageState extends State<LoginPage>
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: Colors.red.withOpacity(0.3),
+                      color: Color(0xFFFF9800).withOpacity(0.3),
                       width: 1,
                     ),
                     boxShadow: [
@@ -314,20 +313,19 @@ class _LoginPageState extends State<LoginPage>
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Logo section
                       Container(
                         width: 80,
                         height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
-                            colors: [Colors.red],
+                            colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.teal.withOpacity(0.5),
+                              color: Color(0xFFFF9800).withOpacity(0.5),
                               blurRadius: 15,
                               spreadRadius: 2,
                             ),
@@ -343,9 +341,8 @@ class _LoginPageState extends State<LoginPage>
 
                       const SizedBox(height: 24),
 
-                      // Title
                       const Text(
-                        "Toxic Avenger",
+                        "X-DEMON",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -365,7 +362,6 @@ class _LoginPageState extends State<LoginPage>
 
                       const SizedBox(height: 32),
 
-                      // Form
                       Form(
                         key: _formKey,
                         child: Column(
@@ -373,7 +369,7 @@ class _LoginPageState extends State<LoginPage>
                             _buildMinimalInput(
                               userController,
                               "Username",
-                              Icons.person,
+                              FontAwesomeIcons.user,
                             ),
 
                             const SizedBox(height: 16),
@@ -381,13 +377,12 @@ class _LoginPageState extends State<LoginPage>
                             _buildMinimalInput(
                               passController,
                               "Password",
-                              Icons.lock,
+                              FontAwesomeIcons.lock,
                               isPassword: true,
                             ),
 
                             const SizedBox(height: 32),
 
-                            // Login button
                             _buildMinimalButton(),
                           ],
                         ),
@@ -398,7 +393,6 @@ class _LoginPageState extends State<LoginPage>
               ),
             ),
 
-            // Top decoration
             Positioned(
               top: 40,
               left: 24,
@@ -406,7 +400,7 @@ class _LoginPageState extends State<LoginPage>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Color(0xFFFF9800),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -419,7 +413,7 @@ class _LoginPageState extends State<LoginPage>
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Color(0xFFFF5722),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -443,15 +437,15 @@ class _LoginPageState extends State<LoginPage>
         decoration: InputDecoration(
           hintText: label,
           hintStyle: const TextStyle(color: Colors.white38),
-          prefixIcon: Icon(icon, color: Colors.red.withOpacity(0.7)),
+          prefixIcon: Icon(icon, color: Color(0xFFFF9800).withOpacity(0.7)),
           suffixIcon: isPassword
               ? IconButton(
             icon: Icon(
               _obscurePassword
-                  ? Icons.visibility_off
-                  : Icons.visibility,
+                  ? FontAwesomeIcons.eyeSlash
+                  : FontAwesomeIcons.eye,
               color: Colors.white38,
-              size: 20,
+              size: 16,
             ),
             onPressed: () {
               setState(() {
@@ -467,14 +461,14 @@ class _LoginPageState extends State<LoginPage>
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
-              color: Colors.red.withOpacity(0.3),
+              color: Color(0xFFFF9800).withOpacity(0.3),
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(
-              color: Colors.red,
+            borderSide: BorderSide(
+              color: Color(0xFFFF9800),
               width: 2,
             ),
           ),
@@ -491,13 +485,13 @@ class _LoginPageState extends State<LoginPage>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
-          colors: [Colors.red],
+          colors: [Color(0xFFFF9800), Color(0xFFFF5722)],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.teal.withOpacity(0.4),
+            color: Color(0xFFFF9800).withOpacity(0.4),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),

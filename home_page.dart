@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
@@ -34,23 +35,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _pulseAnimation;
-
   String selectedBugId = "";
   bool _isSending = false;
   String? _responseMessage;
-
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E1E);
+  final Color accentOrange = const Color(0xFFF63B3B);
+  final Color lightOrange = const Color(0xFFFA6060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
-
-  // Video Player Variables
   late VideoPlayerController _videoController;
   late ChewieController _chewieController;
   bool _isVideoInitialized = false;
@@ -94,13 +90,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       selectedBugId = widget.listBug[0]['bug_id'];
     }
 
-    // Initialize video player from assets
     _initializeVideoPlayer();
   }
 
   void _initializeVideoPlayer() {
     _videoController = VideoPlayerController.asset(
-      'assets/videos/splash.mp4',
+      'assets/videos/banner.mp4',
     );
 
     _videoController.initialize().then((_) {
@@ -159,7 +154,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     try {
       final res = await http.get(Uri.parse(
-          "http://157.245.159.165:4001/sendBug?key=$key&target=$target&bug=$selectedBugId"));
+          "http://157.245.159.165:4000/sendBug?key=$key&target=$target&bug=$selectedBugId"));
       final data = jsonDecode(res.body);
 
       if (data["cooldown"] == true) {
@@ -211,8 +206,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  color == successGreen ? Icons.check_circle :
-                  color == dangerRed ? Icons.error : Icons.info,
+                  color == successGreen ? FontAwesomeIcons.checkCircle :
+                  color == dangerRed ? FontAwesomeIcons.exclamationTriangle : FontAwesomeIcons.infoCircle,
                   color: color,
                   size: 20,
                 ),
@@ -264,27 +259,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Header Section
                 _buildHeaderSection(),
 
                 const SizedBox(height: 24),
 
-                // Video Section
                 _buildVideoSection(),
 
                 const SizedBox(height: 24),
 
-                // Control Panel
                 _buildControlPanel(),
 
                 const SizedBox(height: 24),
 
-                // Send Button
                 _buildSendButton(),
 
                 const SizedBox(height: 16),
 
-                // Response Message
                 if (_responseMessage != null) _buildResponseMessage(),
               ],
             ),
@@ -301,13 +291,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(
-          colors: [primaryBlue, accentBlue],
+          colors: [primaryOrange, accentOrange],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         boxShadow: [
           BoxShadow(
-            color: accentBlue.withOpacity(0.3),
+            color: accentOrange.withOpacity(0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -408,7 +398,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget _buildVideoSection() {
     return Container(
       width: double.infinity,
-      height: 300,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: cardDark,
@@ -431,11 +421,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 color: cardDarker,
                 child: Center(
                   child: CircularProgressIndicator(
-                    color: accentBlue,
+                    color: accentOrange,
                   ),
                 ),
               ),
-            // Overlay gradient
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
@@ -449,7 +438,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            // Overlay text
             Positioned(
               bottom: 16,
               left: 16,
@@ -503,18 +491,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           const SizedBox(height: 16),
 
-          // Target Input
           _buildModernInput(
             controller: targetController,
             label: "Target Number",
             hint: "e.g. +62xxxxxxxxxx",
-            icon: Icons.phone_android,
+            icon: FontAwesomeIcons.phoneAlt,
             keyboardType: TextInputType.phone,
           ),
 
           const SizedBox(height: 16),
 
-          // Bug Selection
           _buildModernDropdown(
             label: "Select Bug",
             value: selectedBugId,
@@ -553,7 +539,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: TextField(
             controller: controller,
@@ -562,7 +548,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-              prefixIcon: Icon(icon, color: accentBlue),
+              prefixIcon: Icon(icon, color: accentOrange),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
@@ -594,14 +580,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: value,
               dropdownColor: cardDarker,
               isExpanded: true,
-              icon: Icon(Icons.arrow_drop_down, color: accentBlue),
+              icon: Icon(FontAwesomeIcons.chevronDown, color: accentOrange),
               style: const TextStyle(color: Colors.white),
               items: items.map((bug) {
                 return DropdownMenuItem<String>(
@@ -633,13 +619,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
-              colors: [accentBlue, lightBlue],
+              colors: [accentOrange, lightOrange],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
             boxShadow: [
               BoxShadow(
-                color: accentBlue.withOpacity(0.4),
+                color: accentOrange.withOpacity(0.4),
                 blurRadius: 10 + (_pulseAnimation.value - 1.0) * 10,
                 offset: const Offset(0, 4),
               ),
@@ -667,7 +653,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 : const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.send, size: 20),
+                Icon(FontAwesomeIcons.paperPlane, size: 20),
                 SizedBox(width: 8),
                 Text(
                   "SEND BUG",
@@ -694,17 +680,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       backgroundColor = successGreen.withOpacity(0.2);
       borderColor = successGreen;
       textColor = successGreen;
-      icon = Icons.check_circle;
+      icon = FontAwesomeIcons.checkCircle;
     } else if (_responseMessage!.startsWith('❌')) {
       backgroundColor = dangerRed.withOpacity(0.2);
       borderColor = dangerRed;
       textColor = dangerRed;
-      icon = Icons.error;
+      icon = FontAwesomeIcons.exclamationTriangle;
     } else {
-      backgroundColor = warningOrange.withOpacity(0.2);
-      borderColor = warningOrange;
-      textColor = warningOrange;
-      icon = Icons.info;
+      backgroundColor = warningYellow.withOpacity(0.2);
+      borderColor = warningYellow;
+      textColor = warningYellow;
+      icon = FontAwesomeIcons.infoCircle;
     }
 
     return Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AdminPage extends StatefulWidget {
   final String sessionKey;
@@ -33,16 +34,15 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   int _selectedTab = 0;
 
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
-  final Color cardDark = const Color(0xFF151932);
-  final Color cardDarker = const Color(0xFF0F1330);
-  final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
-  final Color dangerRed = const Color(0xFFEF4444);
+  final Color primaryDark = const Color(0xFF1A1200);
+  final Color primaryOrange = const Color(0xFFD84315);
+  final Color accentOrange = const Color(0xFFFF7043);
+  final Color lightOrange = const Color(0xFFFFAB91);
+  final Color cardDark = const Color(0xFF251A00);
+  final Color cardDarker = const Color(0xFF1A1200);
+  final Color successGreen = const Color(0xFF4CAF50);
+  final Color warningYellow = const Color(0xFFFFC107);
+  final Color dangerRed = const Color(0xFFF44336);
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://157.245.159.165:4001/listUsers?key=$sessionKey'),
+        Uri.parse('http://157.245.159.165:4000/listUsers?key=$sessionKey'),
       );
       final data = jsonDecode(res.body);
       if (data['valid'] == true && data['authorized'] == true) {
@@ -127,7 +127,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final res = await http.get(
-        Uri.parse('http://157.245.159.165:4001/deleteUser?key=$sessionKey&username=$username'),
+        Uri.parse('http://157.245.159.165:4000/deleteUser?key=$sessionKey&username=$username'),
       );
       final data = jsonDecode(res.body);
       if (data['deleted'] == true) {
@@ -156,7 +156,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
     setState(() => isLoading = true);
     try {
       final url = Uri.parse(
-        'http://157.245.159.165:4001/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole',
+        'http://157.245.159.165:4000/userAdd?key=$sessionKey&username=$username&password=$password&day=$day&role=$newUserRole',
       );
       final res = await http.get(url);
       final data = jsonDecode(res.body);
@@ -191,8 +191,8 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           child: Row(
             children: [
               Icon(
-                color == successGreen ? Icons.check_circle :
-                color == dangerRed ? Icons.error : Icons.info,
+                color == successGreen ? FontAwesomeIcons.checkCircle :
+                color == dangerRed ? FontAwesomeIcons.exclamationCircle : FontAwesomeIcons.infoCircle,
                 color: color,
                 size: 24,
               ),
@@ -238,7 +238,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: cardDark,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accentBlue.withOpacity(0.2)),
+        border: Border.all(color: accentOrange.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
@@ -255,12 +255,12 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: accentBlue.withOpacity(0.2),
+                  color: accentOrange.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.person,
-                  color: accentBlue,
+                  FontAwesomeIcons.user,
+                  color: accentOrange,
                   size: 20,
                 ),
               ),
@@ -295,7 +295,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.delete_outline, color: dangerRed),
+                icon: Icon(FontAwesomeIcons.trashAlt, color: dangerRed),
                 onPressed: () async {
                   final confirm = await showDialog<bool>(
                     context: context,
@@ -307,7 +307,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                       ),
                       title: Row(
                         children: [
-                          Icon(Icons.warning, color: dangerRed),
+                          Icon(FontAwesomeIcons.exclamationTriangle, color: dangerRed),
                           const SizedBox(width: 8),
                           const Text(
                             "Konfirmasi",
@@ -367,13 +367,13 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
         badgeColor = dangerRed;
         break;
       case 'vip':
-        badgeColor = accentBlue;
+        badgeColor = accentOrange;
         break;
       case 'reseller':
         badgeColor = successGreen;
         break;
       case 'reseller1':
-        badgeColor = warningOrange;
+        badgeColor = warningYellow;
         break;
       default:
         badgeColor = Colors.grey;
@@ -405,8 +405,8 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           onPressed: currentPage > 1
               ? () => setState(() => currentPage--)
               : null,
-          icon: const Icon(Icons.chevron_left),
-          color: currentPage > 1 ? accentBlue : Colors.grey,
+          icon: const Icon(FontAwesomeIcons.chevronLeft),
+          color: currentPage > 1 ? accentOrange : Colors.grey,
         ),
         ...List.generate(totalPages > 5 ? 5 : totalPages, (index) {
           int page;
@@ -427,13 +427,13 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             child: ElevatedButton(
               onPressed: () => setState(() => currentPage = page),
               style: ElevatedButton.styleFrom(
-                backgroundColor: currentPage == page ? accentBlue : cardDarker,
+                backgroundColor: currentPage == page ? accentOrange : cardDarker,
                 foregroundColor: currentPage == page ? Colors.white : Colors.white70,
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: BorderSide(
-                    color: currentPage == page ? accentBlue : Colors.white.withOpacity(0.2),
+                    color: currentPage == page ? accentOrange : Colors.white.withOpacity(0.2),
                   ),
                 ),
                 elevation: 0,
@@ -446,8 +446,8 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           onPressed: currentPage < totalPages
               ? () => setState(() => currentPage++)
               : null,
-          icon: const Icon(Icons.chevron_right),
-          color: currentPage < totalPages ? accentBlue : Colors.grey,
+          icon: const Icon(FontAwesomeIcons.chevronRight),
+          color: currentPage < totalPages ? accentOrange : Colors.grey,
         ),
       ],
     );
@@ -463,7 +463,6 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           position: _slideAnimation,
           child: Column(
             children: [
-              // Tab Bar
               Container(
                 margin: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -472,14 +471,13 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                 ),
                 child: Row(
                   children: [
-                    _buildTab(0, "Delete User", Icons.delete_outline),
-                    _buildTab(1, "Create Account", Icons.person_add),
-                    _buildTab(2, "User List", Icons.list),
+                    _buildTab(0, "Delete User", FontAwesomeIcons.userMinus),
+                    _buildTab(1, "Create Account", FontAwesomeIcons.userPlus),
+                    _buildTab(2, "User List", FontAwesomeIcons.users),
                   ],
                 ),
               ),
 
-              // Tab Content
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -511,7 +509,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           duration: const Duration(milliseconds: 300),
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-            color: isSelected ? accentBlue.withOpacity(0.2) : Colors.transparent,
+            color: isSelected ? accentOrange.withOpacity(0.2) : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -519,14 +517,14 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             children: [
               Icon(
                 icon,
-                color: isSelected ? accentBlue : Colors.white.withOpacity(0.6),
+                color: isSelected ? accentOrange : Colors.white.withOpacity(0.6),
                 size: 24,
               ),
               const SizedBox(height: 4),
               Text(
                 title,
                 style: TextStyle(
-                  color: isSelected ? accentBlue : Colors.white.withOpacity(0.6),
+                  color: isSelected ? accentOrange : Colors.white.withOpacity(0.6),
                   fontSize: 12,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
@@ -564,7 +562,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.warning,
+                  FontAwesomeIcons.exclamationTriangle,
                   color: dangerRed,
                   size: 24,
                 ),
@@ -600,7 +598,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             controller: deleteController,
             label: "Username",
             hint: "Enter username to delete",
-            icon: Icons.person,
+            icon: FontAwesomeIcons.user,
           ),
           const SizedBox(height: 24),
           Container(
@@ -643,7 +641,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                   : const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.delete),
+                  Icon(FontAwesomeIcons.trashAlt),
                   SizedBox(width: 8),
                   Text(
                     "DELETE USER",
@@ -686,7 +684,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.person_add,
+                  FontAwesomeIcons.userPlus,
                   color: successGreen,
                   size: 24,
                 ),
@@ -722,14 +720,14 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             controller: createUsernameController,
             label: "Username",
             hint: "Enter username",
-            icon: Icons.person,
+            icon: FontAwesomeIcons.user,
           ),
           const SizedBox(height: 16),
           _buildInputField(
             controller: createPasswordController,
             label: "Password",
             hint: "Enter password",
-            icon: Icons.lock,
+            icon: FontAwesomeIcons.lock,
             obscureText: true,
           ),
           const SizedBox(height: 16),
@@ -737,7 +735,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             controller: createDayController,
             label: "Duration",
             hint: "Enter duration in days",
-            icon: Icons.calendar_today,
+            icon: FontAwesomeIcons.calendarAlt,
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 16),
@@ -788,7 +786,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                   : const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.person_add),
+                  Icon(FontAwesomeIcons.userPlus),
                   SizedBox(width: 8),
                   Text(
                     "CREATE ACCOUNT",
@@ -808,7 +806,6 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
   Widget _buildUserListTab() {
     return Column(
       children: [
-        // Filter Section
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -825,8 +822,8 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           child: Row(
             children: [
               Icon(
-                Icons.filter_list,
-                color: accentBlue,
+                FontAwesomeIcons.filter,
+                color: accentOrange,
               ),
               const SizedBox(width: 12),
               const Text(
@@ -844,7 +841,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
                   decoration: BoxDecoration(
                     color: cardDarker,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: accentBlue.withOpacity(0.3)),
+                    border: Border.all(color: accentOrange.withOpacity(0.3)),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -874,12 +871,11 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
 
         const SizedBox(height: 16),
 
-        // User List
         Expanded(
           child: isLoading
               ? Center(
             child: CircularProgressIndicator(
-              color: accentBlue,
+              color: accentOrange,
             ),
           )
               : filteredList.isEmpty
@@ -888,7 +884,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.people_outline,
+                  FontAwesomeIcons.users,
                   color: Colors.white.withOpacity(0.5),
                   size: 64,
                 ),
@@ -946,7 +942,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: TextField(
             controller: controller,
@@ -956,7 +952,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-              prefixIcon: Icon(icon, color: accentBlue),
+              prefixIcon: Icon(icon, color: accentOrange),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
@@ -988,7 +984,7 @@ class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(

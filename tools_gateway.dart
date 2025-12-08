@@ -11,6 +11,7 @@ import 'instagram_page.dart';
 import 'qr_gen.dart';
 import 'domain_page.dart';
 import 'spam_ngl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ToolsPage extends StatefulWidget {
   final String sessionKey;
@@ -34,14 +35,13 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
   late Animation<double> _bgAnimation;
   late Animation<double> _cardAnimation;
 
-  // Warna tema hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color cardDark = const Color(0xFF151937); // Biru gelap card
+  final Color cardDark = const Color(0xFF151937);
 
   @override
   void initState() {
@@ -80,17 +80,11 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       backgroundColor: primaryDark,
       body: Stack(
         children: [
-          // Background dengan animasi partikel
           _buildAnimatedBackground(),
-
-          // Konten utama
           SafeArea(
             child: Column(
               children: [
-                // Header dengan desain baru
                 _buildNewHeader(),
-
-                // Kategori tools dengan desain baru
                 Expanded(
                   child: _buildToolCategories(),
                 ),
@@ -108,7 +102,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context, child) {
         return Stack(
           children: [
-            // Background gradient
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -122,8 +115,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-
-            // Partikel animasi
             ...List.generate(20, (index) {
               final top = (_bgAnimation.value + index * 0.05) % 1.0;
               final left = (index * 0.1) % 1.0;
@@ -137,11 +128,11 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                   width: size,
                   height: size,
                   decoration: BoxDecoration(
-                    color: lightBlue.withOpacity(opacity),
+                    color: lightOrange.withOpacity(opacity),
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: lightBlue.withOpacity(opacity * 0.5),
+                        color: lightOrange.withOpacity(opacity * 0.5),
                         blurRadius: size,
                         spreadRadius: size / 2,
                       ),
@@ -150,8 +141,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                 ),
               );
             }),
-
-            // Efek cahaya
             Positioned(
               top: -100,
               right: -100,
@@ -167,7 +156,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                         shape: BoxShape.circle,
                         gradient: RadialGradient(
                           colors: [
-                            accentBlue.withOpacity(0.2),
+                            accentOrange.withOpacity(0.2),
                             Colors.transparent,
                           ],
                         ),
@@ -189,10 +178,8 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         children: [
-          // Logo dan judul
           Row(
             children: [
-              // Logo dengan animasi
               TweenAnimationBuilder(
                 tween: Tween<double>(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 800),
@@ -204,21 +191,21 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                       height: 50,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [primaryBlue, accentBlue],
+                          colors: [primaryOrange, accentOrange],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            color: accentBlue.withOpacity(0.4),
+                            color: accentOrange.withOpacity(0.4),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.security,
+                        FontAwesomeIcons.shieldHalved,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -226,10 +213,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                   );
                 },
               ),
-
               const SizedBox(width: 16),
-
-              // Judul
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +231,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                     Text(
                       "Advanced Security Suite",
                       style: TextStyle(
-                        color: lightBlue,
+                        color: lightOrange,
                         fontSize: 14,
                         fontFamily: 'ShareTechMono',
                       ),
@@ -255,19 +239,17 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-
-              // Status user
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: accentBlue.withOpacity(0.2),
+                  color: accentOrange.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: accentBlue.withOpacity(0.5)),
+                  border: Border.all(color: accentOrange.withOpacity(0.5)),
                 ),
                 child: Text(
                   widget.userRole.toUpperCase(),
                   style: TextStyle(
-                    color: lightBlue,
+                    color: lightOrange,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Orbitron',
@@ -276,8 +258,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
               ),
             ],
           ),
-
-          // Search bar
         ],
       ),
     );
@@ -295,8 +275,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  // Bar kategori dengan scroll horizontal
-                  // Grid tools dengan desain baru
                   Expanded(
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -326,16 +304,16 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? accentBlue : Colors.transparent,
+          color: isSelected ? accentOrange : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? accentBlue : accentBlue.withOpacity(0.3),
+            color: isSelected ? accentOrange : accentOrange.withOpacity(0.3),
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected ? primaryWhite : lightBlue,
+            color: isSelected ? primaryWhite : lightOrange,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
         ),
@@ -346,45 +324,45 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
   Widget _buildNewToolCard(int index) {
     final List<Map<String, dynamic>> tools = [
       {
-        "icon": Icons.flash_on,
+        "icon": FontAwesomeIcons.bolt,
         "title": "DDoS",
         "subtitle": "Attack Tools",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showDDoSTools(context),
       },
       {
-        "icon": Icons.wifi,
+        "icon": FontAwesomeIcons.wifi,
         "title": "Network",
         "subtitle": "WiFi & Spam",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showNetworkTools(context),
       },
       {
-        "icon": Icons.search,
+        "icon": FontAwesomeIcons.magnifyingGlass,
         "title": "OSINT",
         "subtitle": "Investigation",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showOSINTTools(context),
       },
       {
-        "icon": Icons.download,
+        "icon": FontAwesomeIcons.download,
         "title": "Downloader",
         "subtitle": "Social Media",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showDownloaderTools(context),
       },
       {
-        "icon": Icons.build,
+        "icon": FontAwesomeIcons.screwdriverWrench,
         "title": "Utilities",
         "subtitle": "Extra Tools",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showUtilityTools(context),
       },
       {
-        "icon": Icons.rocket_launch,
+        "icon": FontAwesomeIcons.rocket,
         "title": "Quick Access",
         "subtitle": "Favorites",
-        "color": accentBlue,
+        "color": accentOrange,
         "onTap": () => _showQuickAccess(context),
       },
     ];
@@ -425,13 +403,12 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Icon dengan background gradien
                         Container(
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [primaryBlue, tool["color"]],
+                              colors: [primaryOrange, tool["color"]],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -450,10 +427,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                             size: 28,
                           ),
                         ),
-
                         const Spacer(),
-
-                        // Judul dan subtitle
                         Text(
                           tool["title"],
                           style: TextStyle(
@@ -463,13 +437,11 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
                             fontFamily: 'Orbitron',
                           ),
                         ),
-
                         const SizedBox(height: 4),
-
                         Text(
                           tool["subtitle"],
                           style: TextStyle(
-                            color: lightBlue,
+                            color: lightOrange,
                             fontSize: 12,
                           ),
                         ),
@@ -493,10 +465,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context) => _buildNewModalSheet(
         context,
         "DDoS Tools",
-        Icons.flash_on,
+        FontAwesomeIcons.bolt,
         [
           _buildModalOption(
-            icon: Icons.flash_on,
+            icon: FontAwesomeIcons.bolt,
             label: "Attack Panel",
             onTap: () {
               Navigator.pop(context);
@@ -512,7 +484,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.dns,
+            icon: FontAwesomeIcons.server,
             label: "Manage Server",
             onTap: () {
               Navigator.pop(context);
@@ -537,10 +509,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context) => _buildNewModalSheet(
         context,
         "Network Tools",
-        Icons.wifi,
+        FontAwesomeIcons.wifi,
         [
           _buildModalOption(
-            icon: Icons.newspaper_outlined,
+            icon: FontAwesomeIcons.envelope,
             label: "Spam NGL",
             onTap: () {
               Navigator.pop(context);
@@ -551,7 +523,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.wifi_off,
+            icon: FontAwesomeIcons.wifi,
             label: "WiFi Killer (Internal)",
             onTap: () {
               Navigator.pop(context);
@@ -563,7 +535,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
           ),
           if (widget.userRole == "vip" || widget.userRole == "owner")
             _buildModalOption(
-              icon: Icons.router,
+              icon: FontAwesomeIcons.satelliteDish,
               label: "WiFi Killer (External)",
               onTap: () {
                 Navigator.pop(context);
@@ -588,10 +560,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context) => _buildNewModalSheet(
         context,
         "OSINT Tools",
-        Icons.search,
+        FontAwesomeIcons.magnifyingGlass,
         [
           _buildModalOption(
-            icon: Icons.badge,
+            icon: FontAwesomeIcons.idCard,
             label: "NIK Detail",
             onTap: () {
               Navigator.pop(context);
@@ -602,7 +574,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.domain,
+            icon: FontAwesomeIcons.globe,
             label: "Domain OSINT",
             onTap: () {
               Navigator.pop(context);
@@ -613,12 +585,12 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.person_search,
+            icon: FontAwesomeIcons.phone,
             label: "Phone Lookup",
             onTap: () => _showComingSoon(context),
           ),
           _buildModalOption(
-            icon: Icons.email,
+            icon: FontAwesomeIcons.envelope,
             label: "Email OSINT",
             onTap: () => _showComingSoon(context),
           ),
@@ -635,10 +607,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context) => _buildNewModalSheet(
         context,
         "Media Downloader",
-        Icons.download,
+        FontAwesomeIcons.download,
         [
           _buildModalOption(
-            icon: Icons.video_library,
+            icon: FontAwesomeIcons.tiktok,
             label: "TikTok Downloader",
             onTap: () {
               Navigator.pop(context);
@@ -649,7 +621,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.camera_alt,
+            icon: FontAwesomeIcons.instagram,
             label: "Instagram Downloader",
             onTap: () {
               Navigator.pop(context);
@@ -672,10 +644,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       builder: (context) => _buildNewModalSheet(
         context,
         "Utility Tools",
-        Icons.build,
+        FontAwesomeIcons.screwdriverWrench,
         [
           _buildModalOption(
-            icon: Icons.qr_code,
+            icon: FontAwesomeIcons.qrcode,
             label: "QR Generator",
             onTap: () {
               Navigator.pop(context);
@@ -686,12 +658,12 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             },
           ),
           _buildModalOption(
-            icon: Icons.security,
+            icon: FontAwesomeIcons.networkWired,
             label: "IP Scanner",
             onTap: () => _showComingSoon(context),
           ),
           _buildModalOption(
-            icon: Icons.network_check,
+            icon: FontAwesomeIcons.satelliteDish,
             label: "Port Scanner",
             onTap: () => _showComingSoon(context),
           ),
@@ -718,10 +690,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        border: Border.all(color: accentBlue.withOpacity(0.3)),
+        border: Border.all(color: accentOrange.withOpacity(0.3)),
         boxShadow: [
           BoxShadow(
-            color: accentBlue.withOpacity(0.2),
+            color: accentOrange.withOpacity(0.2),
             blurRadius: 20,
             spreadRadius: 5,
           ),
@@ -729,13 +701,12 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       ),
       child: Column(
         children: [
-          // Header modal
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [primaryBlue, accentBlue],
+                colors: [primaryOrange, accentOrange],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -768,8 +739,6 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
               ],
             ),
           ),
-
-          // Opsi-opsi
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -793,7 +762,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.3),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: accentBlue.withOpacity(0.2)),
+        border: Border.all(color: accentOrange.withOpacity(0.2)),
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -802,7 +771,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
           height: 40,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [primaryBlue, accentBlue],
+              colors: [primaryOrange, accentOrange],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -822,10 +791,10 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
           width: 30,
           height: 30,
           decoration: BoxDecoration(
-            color: accentBlue.withOpacity(0.2),
+            color: accentOrange.withOpacity(0.2),
             shape: BoxShape.circle,
           ),
-          child: Icon(Icons.arrow_forward_ios, color: lightBlue, size: 14),
+          child: Icon(FontAwesomeIcons.arrowRight, color: lightOrange, size: 14),
         ),
         onTap: onTap,
       ),
@@ -838,7 +807,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.hourglass_top, color: primaryWhite),
+            Icon(FontAwesomeIcons.hourglassHalf, color: primaryWhite),
             const SizedBox(width: 8),
             Text(
               'Feature Coming Soon!',
@@ -850,7 +819,7 @@ class _ToolsPageState extends State<ToolsPage> with TickerProviderStateMixin {
             ),
           ],
         ),
-        backgroundColor: primaryBlue,
+        backgroundColor: primaryOrange,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

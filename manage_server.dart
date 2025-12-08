@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ManageServerPage extends StatefulWidget {
   final String keyToken;
@@ -24,15 +25,14 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
 
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
 
   @override
@@ -76,7 +76,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
   Future<void> _fetchVpsList() async {
     setState(() => isLoading = true);
-    final uri = Uri.parse('http://157.245.159.165:4001/myServer?key=${widget.keyToken}');
+    final uri = Uri.parse('http://157.245.159.165:4000/myServer?key=${widget.keyToken}');
     try {
       final res = await http.get(uri);
       final data = jsonDecode(res.body);
@@ -102,7 +102,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
     setState(() => isAdding = true);
     Navigator.pop(context);
 
-    final uri = Uri.parse('http://157.245.159.165:4001/addServer');
+    final uri = Uri.parse('http://157.245.159.165:4000/addServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,
@@ -134,7 +134,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
     if (!confirmed) return;
 
-    final uri = Uri.parse('http://157.245.159.165:4001/delServer');
+    final uri = Uri.parse('http://157.245.159.165:4000/delServer');
     try {
       final res = await http.post(uri, body: {
         'key': widget.keyToken,
@@ -163,7 +163,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
         ),
         title: Row(
           children: [
-            Icon(Icons.warning, color: dangerRed),
+            Icon(FontAwesomeIcons.triangleExclamation, color: dangerRed),
             const SizedBox(width: 12),
             Text(
               title,
@@ -225,8 +225,8 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  color == successGreen ? Icons.check_circle :
-                  color == dangerRed ? Icons.error : Icons.info,
+                  color == successGreen ? FontAwesomeIcons.circleCheck :
+                  color == dangerRed ? FontAwesomeIcons.circleExclamation : FontAwesomeIcons.circleInfo,
                   color: color,
                   size: 20,
                 ),
@@ -273,7 +273,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
         backgroundColor: cardDarker,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: accentBlue.withOpacity(0.3)),
+          side: BorderSide(color: accentOrange.withOpacity(0.3)),
         ),
         child: Container(
           padding: const EdgeInsets.all(24),
@@ -286,12 +286,12 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: accentBlue.withOpacity(0.2),
+                      color: accentOrange.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      Icons.add,
-                      color: accentBlue,
+                      FontAwesomeIcons.plus,
+                      color: accentOrange,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -306,11 +306,11 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                 ],
               ),
               const SizedBox(height: 24),
-              _buildModernInput("IP VPS", _hostController, Icons.dns),
+              _buildModernInput("IP VPS", _hostController, FontAwesomeIcons.server),
               const SizedBox(height: 16),
-              _buildModernInput("Username", _userController, Icons.person),
+              _buildModernInput("Username", _userController, FontAwesomeIcons.user),
               const SizedBox(height: 16),
-              _buildModernInput("Password", _passController, Icons.lock, obscureText: true),
+              _buildModernInput("Password", _passController, FontAwesomeIcons.lock, obscureText: true),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -326,7 +326,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                   ElevatedButton(
                     onPressed: _addVps,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: accentBlue,
+                      backgroundColor: accentOrange,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -360,14 +360,14 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
           decoration: BoxDecoration(
             color: cardDark,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: TextField(
             controller: controller,
             obscureText: obscureText,
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              prefixIcon: Icon(icon, color: accentBlue),
+              prefixIcon: Icon(icon, color: accentOrange),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             ),
@@ -383,7 +383,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
       decoration: BoxDecoration(
         color: cardDark,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accentBlue.withOpacity(0.2)),
+        border: Border.all(color: accentOrange.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
@@ -402,12 +402,12 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: accentBlue.withOpacity(0.2),
+                    color: accentOrange.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    Icons.dns,
-                    color: accentBlue,
+                    FontAwesomeIcons.server,
+                    color: accentOrange,
                     size: 24,
                   ),
                 ),
@@ -427,7 +427,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                       Text(
                         vps['host'],
                         style: TextStyle(
-                          color: lightBlue,
+                          color: lightOrange,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -463,7 +463,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
               child: Row(
                 children: [
                   Icon(
-                    Icons.person,
+                    FontAwesomeIcons.user,
                     color: Colors.white.withOpacity(0.7),
                     size: 16,
                   ),
@@ -484,7 +484,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
               children: [
                 OutlinedButton.icon(
                   onPressed: () => _deleteVps(vps['host']),
-                  icon: const Icon(Icons.delete_outline, size: 18),
+                  icon: const Icon(FontAwesomeIcons.trashCan, size: 18),
                   label: const Text("HAPUS"),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: dangerRed,
@@ -512,12 +512,12 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                Icons.dns,
-                color: accentBlue,
+                FontAwesomeIcons.server,
+                color: accentOrange,
               ),
             ),
             const SizedBox(width: 12),
@@ -539,27 +539,26 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
         child: SlideTransition(
           position: _slideAnimation,
           child: RefreshIndicator(
-            color: accentBlue,
+            color: accentOrange,
             onRefresh: _fetchVpsList,
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // Header Section
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       gradient: LinearGradient(
-                        colors: [primaryBlue, accentBlue],
+                        colors: [primaryOrange, accentOrange],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: accentBlue.withOpacity(0.3),
+                          color: accentOrange.withOpacity(0.3),
                           blurRadius: 15,
                           offset: const Offset(0, 5),
                         ),
@@ -610,20 +609,19 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
                   const SizedBox(height: 24),
 
-                  // Add VPS Button
                   Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       gradient: LinearGradient(
-                        colors: [accentBlue, lightBlue],
+                        colors: [accentOrange, lightOrange],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: accentBlue.withOpacity(0.4),
+                          color: accentOrange.withOpacity(0.4),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -642,7 +640,7 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.add, size: 20),
+                          Icon(FontAwesomeIcons.plus, size: 20),
                           SizedBox(width: 8),
                           Text(
                             "ADD NEW SERVER",
@@ -658,13 +656,12 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
 
                   const SizedBox(height: 24),
 
-                  // VPS List
                   if (isLoading)
                     Container(
                       height: 200,
                       child: Center(
                         child: CircularProgressIndicator(
-                          color: accentBlue,
+                          color: accentOrange,
                         ),
                       ),
                     )
@@ -675,15 +672,15 @@ class _ManageServerPageState extends State<ManageServerPage> with TickerProvider
                       decoration: BoxDecoration(
                         color: cardDark,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: accentBlue.withOpacity(0.2)),
+                        border: Border.all(color: accentOrange.withOpacity(0.2)),
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.dns_outlined,
+                            FontAwesomeIcons.server,
                             size: 64,
-                            color: accentBlue.withOpacity(0.5),
+                            color: accentOrange.withOpacity(0.5),
                           ),
                           const SizedBox(height: 16),
                           Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttackPanel extends StatefulWidget {
   final String sessionKey;
@@ -19,7 +20,7 @@ class AttackPanel extends StatefulWidget {
 class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin {
   final targetController = TextEditingController();
   final portController = TextEditingController();
-  final String baseUrl = "http://157.245.159.165:4001";
+  final String baseUrl = "http://157.245.159.165:4000";
   late AnimationController _pulseController;
   late AnimationController _fadeController;
   late AnimationController _slideController;
@@ -31,15 +32,15 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
   double attackDuration = 60;
   bool isAttacking = false;
 
-  // Tema warna hitam biru
+  // Tema warna hitam orange
   final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryOrange = const Color(0xFF8A1E1E);
+  final Color accentOrange = const Color(0xFFF63B3B);
+  final Color lightOrange = const Color(0xFFFA6060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
 
   @override
@@ -118,7 +119,7 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
       print(data);
 
       if (data["cooldown"] == true) {
-        _showNotification("Cooldown", "Please wait a moment before sending again.", warningOrange);
+        _showNotification("Cooldown", "Please wait a moment before sending again.", warningYellow);
       } else if (data["valid"] == false) {
         _showNotification("Invalid Key", "Your session key is invalid. Please log in again.", dangerRed);
       } else if (data["sended"] == false) {
@@ -161,8 +162,8 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  color == successGreen ? Icons.check_circle :
-                  color == dangerRed ? Icons.error : Icons.info,
+                  color == successGreen ? FontAwesomeIcons.checkCircle :
+                  color == dangerRed ? FontAwesomeIcons.exclamationTriangle : FontAwesomeIcons.infoCircle,
                   color: color,
                   size: 20,
                 ),
@@ -214,12 +215,12 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                Icons.flash_on,
-                color: accentBlue,
+                FontAwesomeIcons.bolt,
+                color: accentOrange,
               ),
             ),
             const SizedBox(width: 12),
@@ -244,20 +245,19 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Header Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.3),
+                        color: accentOrange.withOpacity(0.3),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -309,8 +309,6 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                 ),
 
                 const SizedBox(height: 24),
-
-                // Target Configuration Card
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -333,12 +331,12 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: accentBlue.withOpacity(0.2),
+                              color: accentOrange.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
-                              Icons.settings_ethernet,
-                              color: accentBlue,
+                              FontAwesomeIcons.networkWired,
+                              color: accentOrange,
                               size: 20,
                             ),
                           ),
@@ -354,38 +352,32 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                         ],
                       ),
                       const SizedBox(height: 20),
-
-                      // Target IP Input
                       _buildModernInput(
                         controller: targetController,
                         label: "Target IP",
                         hint: "e.g. 1.1.1.1",
-                        icon: Icons.computer,
+                        icon: FontAwesomeIcons.desktop,
                       ),
 
                       const SizedBox(height: 16),
-
-                      // Port Input
                       _buildModernInput(
                         controller: portController,
                         label: "Port",
                         hint: isIcmp ? "ICMP does not use port" : "e.g. 80",
-                        icon: Icons.wifi_tethering,
+                        icon: FontAwesomeIcons.wifi,
                         enabled: !isIcmp,
                         keyboardType: TextInputType.number,
                       ),
 
                       const SizedBox(height: 20),
-
-                      // Duration Slider
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
                               Icon(
-                                Icons.timer,
-                                color: accentBlue,
+                                FontAwesomeIcons.clock,
+                                color: accentOrange,
                                 size: 20,
                               ),
                               const SizedBox(width: 8),
@@ -401,13 +393,13 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: accentBlue.withOpacity(0.2),
+                                  color: accentOrange.withOpacity(0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
                                   "${attackDuration.toInt()}s",
                                   style: TextStyle(
-                                    color: accentBlue,
+                                    color: accentOrange,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -417,10 +409,10 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                           const SizedBox(height: 12),
                           SliderTheme(
                             data: SliderTheme.of(context).copyWith(
-                              activeTrackColor: accentBlue,
-                              inactiveTrackColor: accentBlue.withOpacity(0.3),
-                              thumbColor: accentBlue,
-                              overlayColor: accentBlue.withOpacity(0.2),
+                              activeTrackColor: accentOrange,
+                              inactiveTrackColor: accentOrange.withOpacity(0.3),
+                              thumbColor: accentOrange,
+                              overlayColor: accentOrange.withOpacity(0.2),
                               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
                               trackHeight: 4,
                             ),
@@ -439,15 +431,14 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
 
                       const SizedBox(height: 20),
 
-                      // Attack Method Dropdown
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
                               Icon(
-                                Icons.flash_on,
-                                color: accentBlue,
+                                FontAwesomeIcons.bolt,
+                                color: accentOrange,
                                 size: 20,
                               ),
                               const SizedBox(width: 8),
@@ -467,14 +458,14 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                             decoration: BoxDecoration(
                               color: cardDarker,
                               borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: accentBlue.withOpacity(0.3)),
+                              border: Border.all(color: accentOrange.withOpacity(0.3)),
                             ),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
                                 dropdownColor: cardDarker,
                                 value: selectedDoosId,
                                 isExpanded: true,
-                                icon: Icon(Icons.arrow_drop_down, color: accentBlue),
+                                icon: Icon(FontAwesomeIcons.chevronDown, color: accentOrange),
                                 style: const TextStyle(color: Colors.white),
                                 items: widget.listDoos.map((doos) {
                                   return DropdownMenuItem<String>(
@@ -500,21 +491,19 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                 ),
 
                 const SizedBox(height: 24),
-
-                // Launch Button
                 Container(
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
-                      colors: [accentBlue, lightBlue],
+                      colors: [accentOrange, lightOrange],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.4),
+                        color: accentOrange.withOpacity(0.4),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -555,7 +544,7 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
                         : const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.bolt, size: 24),
+                        Icon(FontAwesomeIcons.bolt, size: 24),
                         SizedBox(width: 12),
                         Text(
                           "LAUNCH ATTACK",
@@ -591,7 +580,7 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
           children: [
             Icon(
               icon,
-              color: enabled ? accentBlue : Colors.grey,
+              color: enabled ? accentOrange : Colors.grey,
               size: 20,
             ),
             const SizedBox(width: 8),
@@ -611,7 +600,7 @@ class _AttackPanelState extends State<AttackPanel> with TickerProviderStateMixin
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: enabled ? accentBlue.withOpacity(0.3) : Colors.grey.withOpacity(0.3),
+              color: enabled ? accentOrange.withOpacity(0.3) : Colors.grey.withOpacity(0.3),
             ),
           ),
           child: TextField(

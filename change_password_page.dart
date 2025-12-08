@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const String baseUrl = "http://157.245.159.165:4001";
+const String baseUrl = "http://157.245.159.165:4000";
 
 class ChangePasswordPage extends StatefulWidget {
   final String username;
@@ -34,11 +35,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
   late Animation<double> _animation;
   late Animation<double> _fadeAnimation;
 
-  // Tema warna hitam biru
+  // Tema warna hitam orange
   final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryOrange = const Color(0xFF8A1E1E);
+  final Color accentOrange = const Color(0xFFF63B3B);
+  final Color lightOrange = const Color(0xFFFA6060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
 
@@ -127,13 +128,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
         backgroundColor: cardDarker,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: accentBlue.withOpacity(0.3)),
+          side: BorderSide(color: accentOrange.withOpacity(0.3)),
         ),
         title: Row(
           children: [
             Icon(
-              isSuccess ? Icons.check_circle : Icons.info,
-              color: isSuccess ? Colors.green : accentBlue,
+              isSuccess ? FontAwesomeIcons.checkCircle : FontAwesomeIcons.infoCircle,
+              color: isSuccess ? Colors.green : accentOrange,
             ),
             const SizedBox(width: 12),
             Text(
@@ -155,7 +156,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: accentBlue,
+                color: accentOrange,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(
@@ -189,12 +190,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
             margin: const EdgeInsets.only(right: 16),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: accentBlue.withOpacity(0.2),
+              color: accentOrange.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: const Icon(
-              Icons.security,
-              color: const Color(0xFF3B82F6),
+              FontAwesomeIcons.shieldAlt,
+              color: Color(0xFF3B82F6),
             ),
           ),
         ],
@@ -212,13 +213,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   gradient: LinearGradient(
-                    colors: [primaryBlue, accentBlue],
+                    colors: [primaryOrange, accentOrange],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: accentBlue.withOpacity(0.3),
+                      color: accentOrange.withOpacity(0.3),
                       blurRadius: 15,
                       offset: const Offset(0, 5),
                     ),
@@ -238,7 +239,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
-                              Icons.lock_reset,
+                              FontAwesomeIcons.lock,
                               color: Colors.white,
                               size: 40,
                             ),
@@ -270,7 +271,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
 
               const SizedBox(height: 32),
 
-              // Form Card
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -306,7 +306,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
                     ),
                     const SizedBox(height: 24),
 
-                    // Password Fields
                     _buildPasswordField(
                       "Current Password",
                       oldPassCtrl,
@@ -334,20 +333,19 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
 
                     const SizedBox(height: 32),
 
-                    // Submit Button
                     Container(
                       width: double.infinity,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         gradient: LinearGradient(
-                          colors: [primaryBlue, accentBlue],
+                          colors: [primaryOrange, accentOrange],
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: accentBlue.withOpacity(0.4),
+                            color: accentOrange.withOpacity(0.4),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -375,7 +373,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
                             : const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.security, size: 20),
+                            Icon(FontAwesomeIcons.shieldAlt, size: 20),
                             SizedBox(width: 8),
                             Text(
                               "UPDATE PASSWORD",
@@ -394,14 +392,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
 
               const SizedBox(height: 24),
 
-              // Security Tips
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: cardDark,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: accentBlue.withOpacity(0.3)),
+                  border: Border.all(color: accentOrange.withOpacity(0.3)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,8 +406,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
                     Row(
                       children: [
                         Icon(
-                          Icons.lightbulb_outline,
-                          color: lightBlue,
+                          FontAwesomeIcons.lightbulb,
+                          color: lightOrange,
                           size: 20,
                         ),
                         const SizedBox(width: 8),
@@ -460,7 +457,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
           decoration: BoxDecoration(
             color: cardDarker,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
           ),
           child: TextField(
             controller: controller,
@@ -469,7 +466,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
             decoration: InputDecoration(
               suffixIcon: IconButton(
                 icon: Icon(
-                  obscureText ? Icons.visibility_off : Icons.visibility,
+                  obscureText ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                   color: Colors.white.withOpacity(0.7),
                 ),
                 onPressed: toggleVisibility,
@@ -490,8 +487,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
-            Icons.check_circle_outline,
-            color: lightBlue,
+            FontAwesomeIcons.checkCircle,
+            color: lightOrange,
             size: 16,
           ),
           const SizedBox(width: 8),

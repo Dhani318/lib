@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Toxic Avenger',
+      title: 'X-DEMON',
       theme: ThemeData(
         brightness: Brightness.dark,
         fontFamily: 'ShareTechMono',
         scaffoldBackgroundColor: Colors.black,
         colorScheme: ColorScheme.dark().copyWith(
-          secondary: Colors.purple,
+          secondary: Color(0xFFFF9800),
         ),
       ),
       initialRoute: '/',
@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
                 role: args['role'],
                 sessionKey: args['key'],
                 expiredDate: args['expiredDate'],
-                listBug: List<Map<String, dynamic>>.from(args['listBug'] ?? []), // ✅ aman
-                listDoos: List<Map<String, dynamic>>.from(args['listDoos'] ?? []), // ✅ aman
-                news: List<Map<String, dynamic>>.from(args['news'] ?? []), // ✅ aman
+                listBug: List<Map<String, dynamic>>.from(args['listBug'] ?? []),
+                listDoos: List<Map<String, dynamic>>.from(args['listDoos'] ?? []),
+                news: List<Map<String, dynamic>>.from(args['news'] ?? []),
               ),
             );
 
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               builder: (_) => HomePage(
                 username: args['username'],
                 password: args['password'],
-                listBug: List<Map<String, dynamic>>.from(args['listBug'] ?? []), // ✅ aman
+                listBug: List<Map<String, dynamic>>.from(args['listBug'] ?? []),
                 role: args['role'],
                 expiredDate: args['expiredDate'],
                 sessionKey: args['sessionKey'],

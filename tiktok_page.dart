@@ -6,6 +6,7 @@ import 'package:chewie/chewie.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TiktokDownloaderPage extends StatefulWidget {
   const TiktokDownloaderPage({super.key});
@@ -22,14 +23,13 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
   VideoPlayerController? _videoController;
   ChewieController? _chewieController;
 
-  // Warna tema biru hitam glassmorphism
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = Color(0xFF0A0E27);
+  final Color primaryOrange = Color(0xFF8A1E00);
+  final Color accentOrange = Color(0xFFF68300);
+  final Color lightOrange = Color(0xFFFA9060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color glassColor = Color(0x1FFFFFFF); // Warna kaca transparan
+  final Color glassColor = Color(0x1FFFFFFF);
 
   @override
   void dispose() {
@@ -101,8 +101,8 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
               looping: false,
               showControls: true,
               materialProgressColors: ChewieProgressColors(
-                playedColor: accentBlue,
-                handleColor: lightBlue,
+                playedColor: accentOrange,
+                handleColor: lightOrange,
                 backgroundColor: accentGrey.withOpacity(0.3),
                 bufferedColor: accentGrey.withOpacity(0.2),
               ),
@@ -129,7 +129,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error sharing: $e', style: TextStyle(color: primaryWhite)),
-          backgroundColor: primaryBlue,
+          backgroundColor: primaryOrange,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
@@ -159,7 +159,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Glassmorphism AppBar
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
@@ -180,7 +179,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.video_library, color: lightBlue, size: 24),
+                      Icon(FontAwesomeIcons.tiktok, color: lightOrange, size: 24),
                       const SizedBox(width: 12),
                       Text(
                         'TIKTOK DOWNLOADER',
@@ -198,7 +197,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
 
                 const SizedBox(height: 20),
 
-                // Glassmorphism Input Section
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -223,7 +221,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                         style: TextStyle(color: primaryWhite, fontSize: 16),
                         decoration: InputDecoration(
                           labelText: 'Masukkan URL TikTok',
-                          labelStyle: TextStyle(color: lightBlue),
+                          labelStyle: TextStyle(color: lightOrange),
                           hintText: 'Contoh: https://vt.tiktok.com/xxx/',
                           hintStyle: TextStyle(color: accentGrey),
                           enabledBorder: OutlineInputBorder(
@@ -231,12 +229,12 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: lightBlue, width: 2),
+                            borderSide: BorderSide(color: lightOrange, width: 2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           filled: true,
                           fillColor: Colors.white.withOpacity(0.1),
-                          prefixIcon: Icon(Icons.link, color: lightBlue),
+                          prefixIcon: Icon(FontAwesomeIcons.link, color: lightOrange),
                           suffixIcon: _isLoading
                               ? Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -244,7 +242,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                               width: 18,
                               height: 18,
                               child: CircularProgressIndicator(
-                                color: lightBlue,
+                                color: lightOrange,
                                 strokeWidth: 2,
                               ),
                             ),
@@ -259,13 +257,13 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           gradient: LinearGradient(
-                            colors: [primaryBlue, accentBlue],
+                            colors: [primaryOrange, accentOrange],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: accentBlue.withOpacity(0.4),
+                              color: accentOrange.withOpacity(0.4),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -285,7 +283,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(_isLoading ? Icons.hourglass_top : Icons.download, size: 20),
+                              Icon(_isLoading ? FontAwesomeIcons.hourglassHalf : FontAwesomeIcons.download, size: 20),
                               const SizedBox(width: 8),
                               Text(
                                 _isLoading ? 'PROSES...' : 'DOWNLOAD',
@@ -305,7 +303,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
 
                 const SizedBox(height: 20),
 
-                // Error Message with Glassmorphism
                 if (_errorMessage != null)
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -323,7 +320,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline, color: Colors.redAccent),
+                        Icon(FontAwesomeIcons.circleExclamation, color: Colors.redAccent),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -337,7 +334,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
 
                 const SizedBox(height: 20),
 
-                // Video Result with Glassmorphism
                 if (_videoData != null)
                   Expanded(
                     child: SingleChildScrollView(
@@ -360,19 +356,18 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                         ),
                         child: Column(
                           children: [
-                            // Video Header with Glassmorphism
                             Container(
                               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [primaryBlue, accentBlue],
+                                  colors: [primaryOrange, accentOrange],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: accentBlue.withOpacity(0.4),
+                                    color: accentOrange.withOpacity(0.4),
                                     blurRadius: 8,
                                     offset: const Offset(0, 4),
                                   ),
@@ -381,7 +376,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.videocam, color: primaryWhite, size: 16),
+                                  Icon(FontAwesomeIcons.video, color: primaryWhite, size: 16),
                                   SizedBox(width: 8),
                                   Text(
                                     "VIDEO PREVIEW",
@@ -430,12 +425,12 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      CircularProgressIndicator(color: lightBlue),
+                                      CircularProgressIndicator(color: lightOrange),
                                       SizedBox(height: 16),
                                       Text(
                                         'Loading video...',
                                         style: TextStyle(
-                                          color: lightBlue,
+                                          color: lightOrange,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -446,7 +441,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
 
                             const SizedBox(height: 16),
 
-                            // Video Info with Glassmorphism
                             if (_videoData?['metadata'] != null)
                               Container(
                                 padding: const EdgeInsets.all(12),
@@ -471,7 +465,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                                     const SizedBox(height: 8),
                                     Row(
                                       children: [
-                                        Icon(Icons.person, color: lightBlue, size: 16),
+                                        Icon(FontAwesomeIcons.user, color: lightOrange, size: 16),
                                         SizedBox(width: 8),
                                         Text(
                                           'Creator: ${_videoData!['metadata']['creator'] ?? 'Unknown'}',
@@ -488,20 +482,19 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
 
                             const SizedBox(height: 16),
 
-                            // Share Button with Glassmorphism
                             Container(
                               width: double.infinity,
                               height: 50,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 gradient: LinearGradient(
-                                  colors: [accentBlue, lightBlue],
+                                  colors: [accentOrange, lightOrange],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: lightBlue.withOpacity(0.4),
+                                    color: lightOrange.withOpacity(0.4),
                                     blurRadius: 8,
                                     offset: const Offset(0, 4),
                                   ),
@@ -521,7 +514,7 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                                 child: const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.share, size: 20),
+                                    Icon(FontAwesomeIcons.share, size: 20),
                                     SizedBox(width: 8),
                                     Text(
                                       'SHARE VIDEO',
@@ -541,7 +534,6 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                     ),
                   ),
 
-                // Placeholder dengan Glassmorphism
                 if (_videoData == null && !_isLoading && _errorMessage == null)
                   Expanded(
                     child: Center(
@@ -566,9 +558,9 @@ class _TiktokDownloaderPageState extends State<TiktokDownloaderPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.video_library,
+                              FontAwesomeIcons.tiktok,
                               size: 80,
-                              color: lightBlue.withOpacity(0.7),
+                              color: lightOrange.withOpacity(0.7),
                             ),
                             SizedBox(height: 16),
                             Text(

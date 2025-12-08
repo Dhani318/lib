@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NikCheckerPage extends StatefulWidget {
   const NikCheckerPage({super.key});
@@ -23,15 +24,14 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
   late Animation<Offset> _slideAnimation;
   late Animation<double> _pulseAnimation;
 
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
 
   @override
@@ -158,7 +158,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.check_circle,
+                  FontAwesomeIcons.circleCheck,
                   color: successGreen,
                   size: 20,
                 ),
@@ -208,12 +208,12 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                Icons.credit_card,
-                color: accentBlue,
+                FontAwesomeIcons.idCard,
+                color: accentOrange,
               ),
             ),
             const SizedBox(width: 12),
@@ -238,20 +238,19 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Header Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.3),
+                        color: accentOrange.withOpacity(0.3),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -271,8 +270,8 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                                 color: Colors.white.withOpacity(0.2),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
-                                Icons.credit_card,
+                              child: Icon(
+                                FontAwesomeIcons.idCard,
                                 color: Colors.white,
                                 size: 40,
                               ),
@@ -304,7 +303,6 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
 
                 const SizedBox(height: 24),
 
-                // Input Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -335,7 +333,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                         decoration: BoxDecoration(
                           color: cardDarker,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: accentBlue.withOpacity(0.3)),
+                          border: Border.all(color: accentOrange.withOpacity(0.3)),
                         ),
                         child: TextField(
                           controller: _nikController,
@@ -353,7 +351,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
-                                  color: accentBlue,
+                                  color: accentOrange,
                                   strokeWidth: 2,
                                 ),
                               ),
@@ -370,13 +368,13 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           gradient: LinearGradient(
-                            colors: [accentBlue, lightBlue],
+                            colors: [accentOrange, lightOrange],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: accentBlue.withOpacity(0.4),
+                              color: accentOrange.withOpacity(0.4),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -417,7 +415,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                               : const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.search, size: 20),
+                              Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
                               SizedBox(width: 8),
                               Text(
                                 "VERIFY NIK",
@@ -436,7 +434,6 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
 
                 const SizedBox(height: 24),
 
-                // Error Message
                 if (_errorMessage != null)
                   Container(
                     width: double.infinity,
@@ -448,7 +445,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline, color: dangerRed),
+                        Icon(FontAwesomeIcons.circleExclamation, color: dangerRed),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -462,17 +459,15 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
 
                 const SizedBox(height: 24),
 
-                // Results Section
                 if (_data != null)
                   FadeTransition(
                     opacity: _fadeAnimation,
                     child: Column(
                       children: [
-                        // Personal Information Card
                         _buildInfoCard(
                           title: "Personal Information",
-                          icon: Icons.person,
-                          color: accentBlue,
+                          icon: FontAwesomeIcons.user,
+                          color: accentOrange,
                           children: [
                             _buildInfoItem(
                               label: "NIK",
@@ -502,10 +497,9 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
 
                         const SizedBox(height: 16),
 
-                        // Address Information Card
                         _buildInfoCard(
                           title: "Address Information",
-                          icon: Icons.location_on,
+                          icon: FontAwesomeIcons.locationDot,
                           color: successGreen,
                           children: [
                             _buildInfoItem(
@@ -538,11 +532,10 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
 
                         const SizedBox(height: 16),
 
-                        // Additional Information Card
                         _buildInfoCard(
                           title: "Additional Information",
-                          icon: Icons.info,
-                          color: warningOrange,
+                          icon: FontAwesomeIcons.circleInfo,
+                          color: warningYellow,
                           children: [
                             _buildInfoItem(
                               label: "Zodiac",
@@ -591,7 +584,6 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Card Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
@@ -628,7 +620,6 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
               ],
             ),
           ),
-          // Card Content
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -653,7 +644,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
       decoration: BoxDecoration(
         color: cardDarker,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accentBlue.withOpacity(0.2)),
+        border: Border.all(color: accentOrange.withOpacity(0.2)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -674,7 +665,7 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
                 Text(
                   value,
                   style: TextStyle(
-                    color: lightBlue,
+                    color: lightOrange,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -686,11 +677,11 @@ class _NikCheckerPageState extends State<NikCheckerPage> with TickerProviderStat
             Container(
               margin: const EdgeInsets.only(left: 8),
               decoration: BoxDecoration(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: IconButton(
-                icon: Icon(Icons.copy, color: accentBlue, size: 18),
+                icon: Icon(FontAwesomeIcons.copy, color: accentOrange, size: 18),
                 onPressed: () => _copyToClipboard(value, label),
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(minWidth: 40),

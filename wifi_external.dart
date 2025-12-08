@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WifiInternalPage extends StatefulWidget {
   final String sessionKey;
@@ -26,15 +27,14 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
   late Animation<double> _glowAnimation;
   late Animation<double> _scanAnimation;
 
-  // Warna tema hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color cardDark = const Color(0xFF151937); // Biru gelap card
-  final Color glassColor = const Color(0x1FFFFFFF); // Warna kaca transparan
+  final Color cardDark = const Color(0xFF151937);
+  final Color glassColor = const Color(0x1FFFFFFF);
 
   @override
   void initState() {
@@ -117,7 +117,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
     HapticFeedback.heavyImpact();
     setState(() => isAttacking = true);
     final url = Uri.parse(
-        "http://157.245.159.165:4001/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
+        "http://157.245.159.165:4000/killWifi?key=${widget.sessionKey}&target=$publicIp&duration=120");
     try {
       final res = await http.get(url);
       if (res.statusCode == 200) {
@@ -142,10 +142,10 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
           decoration: BoxDecoration(
             color: cardDark,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: accentBlue.withOpacity(0.3)),
+            border: Border.all(color: accentOrange.withOpacity(0.3)),
             boxShadow: [
               BoxShadow(
-                color: accentBlue.withOpacity(0.3),
+                color: accentOrange.withOpacity(0.3),
                 blurRadius: 15,
                 spreadRadius: 2,
               ),
@@ -157,7 +157,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
               Text(
                 title,
                 style: TextStyle(
-                  color: lightBlue,
+                  color: lightOrange,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Orbitron',
@@ -179,7 +179,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                     ),
@@ -208,19 +208,12 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
       backgroundColor: primaryDark,
       body: Stack(
         children: [
-          // Background dengan efek animasi
           _buildAnimatedBackground(),
-
-          // Konten utama
           SafeArea(
             child: Column(
               children: [
-                // Header dengan desain baru
                 _buildNewHeader(),
-
                 const SizedBox(height: 20),
-
-                // Konten utama
                 Expanded(
                   child: isLoading
                       ? _buildLoadingView()
@@ -252,7 +245,6 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
           ),
           child: Stack(
             children: [
-              // Partikel animasi
               ...List.generate(20, (index) {
                 final top = (_glowController.value + index * 0.05) % 1.0;
                 final left = (index * 0.1) % 1.0;
@@ -266,11 +258,11 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                     width: size,
                     height: size,
                     decoration: BoxDecoration(
-                      color: lightBlue.withOpacity(opacity),
+                      color: lightOrange.withOpacity(opacity),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: lightBlue.withOpacity(opacity * 0.5),
+                          color: lightOrange.withOpacity(opacity * 0.5),
                           blurRadius: size,
                           spreadRadius: size / 2,
                         ),
@@ -279,8 +271,6 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                   ),
                 );
               }),
-
-              // Efek cahaya
               Positioned(
                 top: -150,
                 right: -150,
@@ -296,7 +286,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              accentBlue.withOpacity(0.15 * _glowAnimation.value),
+                              accentOrange.withOpacity(0.15 * _glowAnimation.value),
                               Colors.transparent,
                             ],
                           ),
@@ -334,7 +324,6 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
       ),
       child: Row(
         children: [
-          // Logo dengan animasi pulse
           AnimatedBuilder(
             animation: _pulseAnimation,
             builder: (context, child) {
@@ -345,21 +334,21 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                   height: 50,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: BorderRadius.circular(15),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.4),
+                        color: accentOrange.withOpacity(0.4),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
                     ],
                   ),
                   child: const Icon(
-                    Icons.wifi_off,
+                    FontAwesomeIcons.wifi,
                     color: Colors.white,
                     size: 30,
                   ),
@@ -367,10 +356,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
               );
             },
           ),
-
           const SizedBox(width: 16),
-
-          // Judul
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -388,7 +374,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                 Text(
                   "External Network Disruption",
                   style: TextStyle(
-                    color: lightBlue,
+                    color: lightOrange,
                     fontSize: 14,
                     fontFamily: 'ShareTechMono',
                   ),
@@ -396,17 +382,15 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
               ],
             ),
           ),
-
-          // Status indikator
           Container(
             width: 12,
             height: 12,
             decoration: BoxDecoration(
-              color: isAttacking ? Colors.redAccent : lightBlue,
+              color: isAttacking ? Colors.redAccent : lightOrange,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: (isAttacking ? Colors.redAccent : lightBlue).withOpacity(0.5),
+                  color: (isAttacking ? Colors.redAccent : lightOrange).withOpacity(0.5),
                   blurRadius: 5,
                   spreadRadius: 1,
                 ),
@@ -423,53 +407,45 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Loading animation
           AnimatedBuilder(
             animation: _scanAnimation,
             builder: (context, child) {
               return Stack(
                 alignment: Alignment.center,
                 children: [
-                  // Outer circle
                   Container(
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: accentBlue.withOpacity(0.3),
+                        color: accentOrange.withOpacity(0.3),
                         width: 2,
                       ),
                     ),
                   ),
-
-                  // Middle circle
                   Container(
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: accentBlue.withOpacity(0.5),
+                        color: accentOrange.withOpacity(0.5),
                         width: 2,
                       ),
                     ),
                   ),
-
-                  // Inner circle
                   Container(
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: accentBlue.withOpacity(0.7),
+                        color: accentOrange.withOpacity(0.7),
                         width: 2,
                       ),
                     ),
                   ),
-
-                  // Scanning line
                   Transform.rotate(
                     angle: _scanAnimation.value * 2 * 3.14159,
                     child: Container(
@@ -479,39 +455,33 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                         gradient: LinearGradient(
                           colors: [
                             Colors.transparent,
-                            lightBlue,
+                            lightOrange,
                             Colors.transparent,
                           ],
                         ),
                       ),
                     ),
                   ),
-
-                  // Center icon
                   Icon(
-                    Icons.wifi,
-                    color: lightBlue,
+                    FontAwesomeIcons.wifi,
+                    color: lightOrange,
                     size: 40,
                   ),
                 ],
               );
             },
           ),
-
           const SizedBox(height: 24),
-
           Text(
             "Scanning Network...",
             style: TextStyle(
-              color: lightBlue,
+              color: lightOrange,
               fontSize: 18,
               fontFamily: 'Orbitron',
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 8),
-
           Text(
             "Analyzing target information",
             style: TextStyle(
@@ -529,7 +499,6 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          // Target Information Section
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -552,7 +521,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
               children: [
                 Row(
                   children: [
-                    Icon(Icons.control_point_sharp, color: lightBlue),
+                    Icon(FontAwesomeIcons.bullseye, color: lightOrange),
                     const SizedBox(width: 8),
                     Text(
                       "TARGET INFORMATION",
@@ -565,38 +534,23 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                     ),
                   ],
                 ),
-
                 const SizedBox(height: 16),
-
-                // IP Address
-                _buildInfoRow("IP Address", publicIp, Icons.language),
-
+                _buildInfoRow("IP Address", publicIp, FontAwesomeIcons.globe),
                 const SizedBox(height: 12),
-
-                // Region
-                _buildInfoRow("Region", region, Icons.map),
-
+                _buildInfoRow("Region", region, FontAwesomeIcons.mapLocationDot),
                 const SizedBox(height: 12),
-
-                // ASN
-                _buildInfoRow("ASN", asn, Icons.storage),
-
+                _buildInfoRow("ASN", asn, FontAwesomeIcons.database),
                 const SizedBox(height: 12),
-
-                // VPN Status
                 _buildInfoRow(
                   "VPN Status",
                   isVpn ? "DETECTED" : "CLEAN",
-                  isVpn ? Icons.warning : Icons.check_circle,
+                  isVpn ? FontAwesomeIcons.triangleExclamation : FontAwesomeIcons.circleCheck,
                   isVpn ? Colors.redAccent : Colors.greenAccent,
                 ),
               ],
             ),
           ),
-
           const SizedBox(height: 20),
-
-          // VPN Warning
           if (isVpn)
             Container(
               padding: const EdgeInsets.all(16),
@@ -610,7 +564,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
               ),
               child: Row(
                 children: [
-                  Icon(Icons.warning, color: Colors.redAccent),
+                  Icon(FontAwesomeIcons.triangleExclamation, color: Colors.redAccent),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -624,10 +578,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                 ],
               ),
             ),
-
           const SizedBox(height: 20),
-
-          // Attack Button
           if (!isVpn)
             GestureDetector(
               onTap: isAttacking ? null : _attackTarget,
@@ -643,16 +594,16 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                     end: Alignment.centerRight,
                   )
                       : LinearGradient(
-                    colors: [primaryBlue, accentBlue],
+                    colors: [primaryOrange, accentOrange],
                     begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+                    end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
                       color: isAttacking
                           ? Colors.transparent
-                          : accentBlue.withOpacity(0.4),
+                          : accentOrange.withOpacity(0.4),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     ),
@@ -686,7 +637,7 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                       : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.flash_on, color: primaryWhite),
+                      Icon(FontAwesomeIcons.bolt, color: primaryWhite),
                       const SizedBox(width: 12),
                       Text(
                         "INITIATE ATTACK",
@@ -702,23 +653,20 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
                 ),
               ),
             ),
-
           const SizedBox(height: 20),
-
-          // Info Box
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 width: 1,
               ),
             ),
             child: Row(
               children: [
-                Icon(Icons.info_outline, color: lightBlue),
+                Icon(FontAwesomeIcons.circleInfo, color: lightOrange),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -747,19 +695,17 @@ class _WifiInternalPageState extends State<WifiInternalPage> with TickerProvider
             color: Colors.black.withOpacity(0.3),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: accentBlue.withOpacity(0.3),
+              color: accentOrange.withOpacity(0.3),
               width: 1,
             ),
           ),
           child: Icon(
             icon,
-            color: iconColor ?? lightBlue,
+            color: iconColor ?? lightOrange,
             size: 20,
           ),
         ),
-
         const SizedBox(width: 12),
-
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -74,7 +74,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
       backgroundColor: const Color(0xFF0A0E27),
       body: Stack(
         children: [
-          // Background pattern
           Positioned.fill(
             child: Container(
               decoration: const BoxDecoration(
@@ -82,10 +81,10 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                   center: Alignment.topRight,
                   radius: 1.5,
                   colors: [
-  Color(0xFF600F0F),
-  Color(0xFF3E1616),
-  Color(0xFF600F0F),
-],
+                    Color(0xFF7E1A1A),
+                    Color(0xFF0A0E27),
+                    Color(0xFF110000),
+                  ],
                 ),
               ),
               child: CustomPaint(
@@ -94,11 +93,9 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
             ),
           ),
 
-          // Main content
           SafeArea(
             child: Column(
               children: [
-                // Header with logo
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   child: Row(
@@ -143,7 +140,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                   ),
                 ),
 
-                // Video section with new design
                 Expanded(
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -151,7 +147,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                       children: [
                         const SizedBox(height: 20),
 
-                        // Video container with new design
                         FadeTransition(
                           opacity: _fadeAnimation,
                           child: SlideTransition(
@@ -162,7 +157,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                 borderRadius: BorderRadius.circular(24),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF3949AB).withOpacity(0.3),
+                                    color: const Color(0xFFAB3939).withOpacity(0.3),
                                     blurRadius: 20,
                                     spreadRadius: 5,
                                   ),
@@ -188,13 +183,13 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                         : Container(
                                       width: double.infinity,
                                       height: double.infinity,
-                                      color: const Color(0xFF1A237E),
+                                      color: const Color(0xFF7E1A1A),
                                       child: const Center(
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             CircularProgressIndicator(
-                                              color: Color(0xFF5C6BC0),
+                                              color: Color(0xFFC05C5C),
                                               strokeWidth: 3,
                                             ),
                                             SizedBox(height: 16),
@@ -210,7 +205,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                       ),
                                     ),
 
-                                    // Gradient overlay
                                     Positioned.fill(
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -226,7 +220,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                       ),
                                     ),
 
-                                    // Title with new design
                                     Positioned(
                                       bottom: 30,
                                       left: 0,
@@ -238,12 +231,12 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                                             color: Colors.black.withOpacity(0.6),
                                             borderRadius: BorderRadius.circular(30),
                                             border: Border.all(
-                                              color: const Color(0xFF5C6BC0).withOpacity(0.5),
+                                              color: const Color(0xFFC05C5C).withOpacity(0.5),
                                               width: 1,
                                             ),
                                           ),
                                           child: const Text(
-                                            "Toxic Avenger",
+                                            "X-DEMON",
                                             style: TextStyle(
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold,
@@ -263,7 +256,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
 
                         const SizedBox(height: 60),
 
-                        // Login button with new design
                         Container(
                           width: double.infinity,
                           height: 56,
@@ -271,7 +263,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.redAccent.withOpacity(0.4),
+                                color: const Color(0xFFAB3939).withOpacity(0.4),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -279,7 +271,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                           ),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                              backgroundColor: const Color(0xFFAB3939),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
@@ -292,7 +284,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.login_rounded, size: 20),
+                                Icon(FontAwesomeIcons.signInAlt, size: 20),
                                 SizedBox(width: 8),
                                 Text(
                                   "Login",
@@ -308,30 +300,29 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
 
                         const SizedBox(height: 16),
 
-                        // Register button with new design
                         Container(
                           width: double.infinity,
                           height: 56,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: Colors.red,
+                              color: const Color(0xFFC05C5C),
                               width: 2,
                             ),
                           ),
                           child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.red,
+                              foregroundColor: const Color(0xFFC05C5C),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               side: BorderSide.none,
                             ),
-                            onPressed: () => _openUrl("https://t.me/shivcodeee"),
+                            onPressed: () => _openUrl("https://t.me/foru_x"),
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.app_registration_rounded, size: 20),
+                                Icon(FontAwesomeIcons.userPlus, size: 20),
                                 SizedBox(width: 8),
                                 Text(
                                   "Register",
@@ -351,7 +342,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                   ),
                 ),
 
-                // Footer with new design
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -380,14 +370,14 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
                         children: [
                           _buildSocialButton(
                             icon: FontAwesomeIcons.telegram,
-                            url: "https://t.me/shivcodeee",
+                            url: "https://t.me/foru_x",
                           ),
                           const SizedBox(width: 16),
                         ],
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        "© 2025 TOXIC AVENGER",
+                        "© 2025 X-DEMON - All Rights Reserved",
                         style: TextStyle(
                           color: Colors.white38,
                           fontSize: 12,
@@ -419,7 +409,7 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
       child: IconButton(
         icon: FaIcon(
           icon,
-          color: Colors.red,
+          color: const Color(0xFFC05C5C),
           size: 20,
         ),
         onPressed: () => _openUrl(url),
@@ -428,7 +418,6 @@ class _LandingPageState extends State<LandingPage> with TickerProviderStateMixin
   }
 }
 
-// Custom painter for background pattern
 class BackgroundPattern extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

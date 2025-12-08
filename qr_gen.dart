@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class QrGeneratorPage extends StatefulWidget {
   const QrGeneratorPage({super.key});
@@ -25,15 +26,14 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
   late Animation<Offset> _slideAnimation;
   late Animation<double> _pulseAnimation;
 
-  // Tema warna hitam biru
-  final Color primaryDark = const Color(0xFF270A0A);
-  final Color primaryBlue = const Color(0xFF8A1E1E);
-  final Color accentBlue = const Color(0xFFF63B3B);
-  final Color lightBlue = const Color(0xFFFA6060);
+  final Color primaryDark = const Color(0xFF0A0E27);
+  final Color primaryOrange = const Color(0xFF8A1E00);
+  final Color accentOrange = const Color(0xFFF68300);
+  final Color lightOrange = const Color(0xFFFA9060);
   final Color cardDark = const Color(0xFF151932);
   final Color cardDarker = const Color(0xFF0F1330);
   final Color successGreen = const Color(0xFF10B981);
-  final Color warningOrange = const Color(0xFFF59E0B);
+  final Color warningYellow = const Color(0xFFF59E0B);
   final Color dangerRed = const Color(0xFFEF4444);
 
   @override
@@ -167,8 +167,8 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  color == successGreen ? Icons.check_circle :
-                  color == dangerRed ? Icons.error : Icons.info,
+                  color == successGreen ? FontAwesomeIcons.circleCheck :
+                  color == dangerRed ? FontAwesomeIcons.circleExclamation : FontAwesomeIcons.circleInfo,
                   color: color,
                   size: 20,
                 ),
@@ -218,12 +218,12 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: accentBlue.withOpacity(0.2),
+                color: accentOrange.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(
-                Icons.qr_code,
-                color: accentBlue,
+                FontAwesomeIcons.qrcode,
+                color: accentOrange,
               ),
             ),
             const SizedBox(width: 12),
@@ -248,20 +248,19 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Header Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
-                      colors: [primaryBlue, accentBlue],
+                      colors: [primaryOrange, accentOrange],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: accentBlue.withOpacity(0.3),
+                        color: accentOrange.withOpacity(0.3),
                         blurRadius: 15,
                         offset: const Offset(0, 5),
                       ),
@@ -281,8 +280,8 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                                 color: Colors.white.withOpacity(0.2),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
-                                Icons.qr_code_scanner,
+                              child: Icon(
+                                FontAwesomeIcons.qrcode,
                                 color: Colors.white,
                                 size: 40,
                               ),
@@ -314,7 +313,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
 
                 const SizedBox(height: 24),
 
-                // Input Section
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -345,7 +343,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                         decoration: BoxDecoration(
                           color: cardDarker,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: accentBlue.withOpacity(0.3)),
+                          border: Border.all(color: accentOrange.withOpacity(0.3)),
                         ),
                         child: TextField(
                           controller: _textController,
@@ -362,7 +360,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
-                                  color: accentBlue,
+                                  color: accentOrange,
                                   strokeWidth: 2,
                                 ),
                               ),
@@ -379,13 +377,13 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           gradient: LinearGradient(
-                            colors: [accentBlue, lightBlue],
+                            colors: [accentOrange, lightOrange],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: accentBlue.withOpacity(0.4),
+                              color: accentOrange.withOpacity(0.4),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             ),
@@ -426,7 +424,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                               : const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.qr_code, size: 20),
+                              Icon(FontAwesomeIcons.qrcode, size: 20),
                               SizedBox(width: 8),
                               Text(
                                 "GENERATE QR",
@@ -445,7 +443,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
 
                 const SizedBox(height: 24),
 
-                // Error Message
                 if (_errorMessage != null)
                   Container(
                     width: double.infinity,
@@ -457,7 +454,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline, color: dangerRed),
+                        Icon(FontAwesomeIcons.circleExclamation, color: dangerRed),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -471,7 +468,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
 
                 const SizedBox(height: 24),
 
-                // QR Result
                 if (_qrImage != null)
                   Container(
                     width: double.infinity,
@@ -495,12 +491,12 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: accentBlue.withOpacity(0.2),
+                                color: accentOrange.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Icon(
-                                Icons.qr_code,
-                                color: accentBlue,
+                                FontAwesomeIcons.qrcode,
+                                color: accentOrange,
                                 size: 20,
                               ),
                             ),
@@ -566,7 +562,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                                 offset: const Offset(0, 4),
                               ),
                             ],
-                          ),
+                        ),
                           child: ElevatedButton(
                             onPressed: _shareQR,
                             style: ElevatedButton.styleFrom(
@@ -580,7 +576,7 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                             child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.share, size: 20),
+                                Icon(FontAwesomeIcons.share, size: 20),
                                 SizedBox(width: 8),
                                 Text(
                                   "SHARE QR CODE",
@@ -597,7 +593,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                     ),
                   ),
 
-                // Placeholder ketika belum generate QR
                 if (_qrImage == null && !_isLoading && _errorMessage == null)
                   Container(
                     width: double.infinity,
@@ -606,15 +601,15 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> with TickerProviderSt
                     decoration: BoxDecoration(
                       color: cardDark,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: accentBlue.withOpacity(0.2)),
+                      border: Border.all(color: accentOrange.withOpacity(0.2)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.qr_code_scanner,
+                          FontAwesomeIcons.qrcode,
                           size: 64,
-                          color: accentBlue.withOpacity(0.5),
+                          color: accentOrange.withOpacity(0.5),
                         ),
                         const SizedBox(height: 16),
                         Text(

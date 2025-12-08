@@ -7,7 +7,7 @@ import 'package:web_socket_channel/status.dart' as status;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'bug_sender.dart';
-import 'package:http/http.dart' as http;
+
 import 'nik_check.dart';
 import 'admin_page.dart';
 import 'home_page.dart';
@@ -66,18 +66,16 @@ class _DashboardPageState extends State<DashboardPage>
 
   int onlineUsers = 0;
   int activeConnections = 0;
-
-  // Warna tema hitam biru
-  final Color primaryDark = Color(0xFF270A0A);
-  final Color primaryBlue = Color(0xFF8A1E1E);
-  final Color accentBlue = Color(0xFFF63B3B);
-  final Color lightBlue = Color(0xFFFA6060);
+  final Color primaryDark = Color(0xFF0A0E27);
+  final Color primaryOrange = Color(0xFF8A1E1E);
+  final Color accentOrange = Color(0xFFF63B3B);
+  final Color lightOrange = Color(0xFFFA6060);
   final Color primaryWhite = Colors.white;
   final Color accentGrey = Colors.grey.shade400;
-  final Color cardDark = Color(0xFF1A0A0A);
+  final Color cardDark = Color(0xFF151932);
   final Color cardDarker = Color(0xFF0F1330);
-  final Color blueGradientStart = Color(0xFF8A1E1E);
-  final Color blueGradientEnd = Color(0xFFF63B3B);
+  final Color orangeGradientStart = Color(0xFF8A1E1E);
+  final Color orangeGradientEnd = Color(0xFFF63B3B);
 
   @override
   void initState() {
@@ -123,7 +121,7 @@ class _DashboardPageState extends State<DashboardPage>
 void _connectToWebSocket() async {
   try {
     final validateResponse = await http.post(
-      Uri.parse('http://157.245.159.165:4001/validate'),
+      Uri.parse('http://157.245.159.165:4000/validate'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "type": "validate",
@@ -148,7 +146,7 @@ void _connectToWebSocket() async {
     }
 
     final statsResponse = await http.post(
-      Uri.parse('http://157.245.159.165:4001/stats'),
+      Uri.parse('http://157.245.159.165:4000/stats'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"type": "stats"}),
     );
@@ -166,6 +164,7 @@ void _connectToWebSocket() async {
     print('HTTP Error: $error');
   }
 }
+
   void _handleInvalidSession(String message) async {
     await Future.delayed(const Duration(milliseconds: 300));
     final prefs = await SharedPreferences.getInstance();
@@ -178,7 +177,7 @@ void _connectToWebSocket() async {
       builder: (_) => AlertDialog(
         backgroundColor: cardDarker,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        title: Text("⚠️ Session Expired", style: TextStyle(color: accentBlue, fontWeight: FontWeight.bold)),
+        title: Text("⚠️ Session Expired", style: TextStyle(color: accentOrange, fontWeight: FontWeight.bold)),
         content: Text(message, style: TextStyle(color: accentGrey)),
         actions: [
           TextButton(
@@ -188,7 +187,7 @@ void _connectToWebSocket() async {
                     (route) => false,
               );
             },
-            child: Text("OK", style: TextStyle(color: accentBlue, fontWeight: FontWeight.bold)),
+            child: Text("OK", style: TextStyle(color: accentOrange, fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -235,24 +234,13 @@ void _connectToWebSocket() async {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header Section
             _buildHeaderSection(),
-
             const SizedBox(height: 24),
-
-            // News Section
             _buildNewsSection(),
-
             const SizedBox(height: 24),
-
-            // Stats Cards
             _buildStatsCards(),
-
             const SizedBox(height: 24),
-
-            // Account Info
-            _buildAccountInfo(),
-            
+            _buildAccountInfo(),            
             const SizedBox(height: 12),
 
             Container(
@@ -270,14 +258,14 @@ void _connectToWebSocket() async {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.orange,
                   padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
+                    side: BorderSide(color: Colors.orangeAccent.withOpacity(0.5)),
                   ),
                   elevation: 4,
-                  shadowColor: Colors.blue.withOpacity(0.5),
+                  shadowColor: Colors.orange.withOpacity(0.5),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -306,13 +294,13 @@ void _connectToWebSocket() async {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(
-          colors: [blueGradientStart, blueGradientEnd],
+          colors: [orangeGradientStart, orangeGradientEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         boxShadow: [
           BoxShadow(
-            color: accentBlue.withOpacity(0.3),
+            color: accentOrange.withOpacity(0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -330,7 +318,7 @@ void _connectToWebSocket() async {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
-                  Icons.dashboard,
+                  FontAwesomeIcons.gripHorizontal,
                   color: Colors.white,
                   size: 24,
                 ),
@@ -348,7 +336,7 @@ void _connectToWebSocket() async {
                       ),
                     ),
                     Text(
-                      "Toxic Avenger Dashboard",
+                      "X-DEMON Dashboard",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -364,13 +352,13 @@ void _connectToWebSocket() async {
           Row(
             children: [
               _buildQuickStat(
-                icon: Icons.people,
+                icon: FontAwesomeIcons.users,
                 label: "Online Users",
                 value: "$onlineUsers",
               ),
               const SizedBox(width: 16),
               _buildQuickStat(
-                icon: Icons.link,
+                icon: FontAwesomeIcons.link,
                 label: "Connections",
                 value: "$activeConnections",
               ),
@@ -533,16 +521,16 @@ void _connectToWebSocket() async {
           children: [
             Expanded(
               child: _buildStatCard(
-                icon: Icons.person,
+                icon: FontAwesomeIcons.user,
                 title: "Username",
                 value: username,
-                color: accentBlue,
+                color: accentOrange,
               ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: _buildStatCard(
-                icon: Icons.verified_user,
+                icon: FontAwesomeIcons.shieldAlt,
                 title: "Role",
                 value: role.toUpperCase(),
                 color: _getRoleColor(role),
@@ -552,7 +540,7 @@ void _connectToWebSocket() async {
         ),
         const SizedBox(height: 16),
         _buildStatCard(
-          icon: Icons.calendar_today,
+          icon: FontAwesomeIcons.calendarAlt,
           title: "Account Expires",
           value: expiredDate,
           color: Colors.orange,
@@ -658,13 +646,13 @@ void _connectToWebSocket() async {
             children: [
               if (role == "reseller" || role == "owner")
                 _buildActionCard(
-                  icon: Icons.store,
+                  icon: FontAwesomeIcons.store,
                   label: "Seller Page",
                   onTap: () => _onDrawerItemSelected(5),
                 ),
               if (role == "owner")
                 _buildActionCard(
-                  icon: Icons.admin_panel_settings,
+                  icon: FontAwesomeIcons.userShield,
                   label: "Admin Panel",
                   onTap: () => _onDrawerItemSelected(6),
                 ),
@@ -687,12 +675,12 @@ void _connectToWebSocket() async {
         decoration: BoxDecoration(
           color: cardDarker,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: accentBlue.withOpacity(0.3)),
+          border: Border.all(color: accentOrange.withOpacity(0.3)),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: accentBlue, size: 28),
+            Icon(icon, color: accentOrange, size: 28),
             const SizedBox(height: 8),
             Text(
               label,
@@ -714,13 +702,13 @@ void _connectToWebSocket() async {
       case "owner":
         return Colors.red;
       case "vip":
-        return accentBlue;
+        return accentOrange;
       case "reseller":
         return Colors.green;
       case "premium":
         return Colors.orange;
       default:
-        return lightBlue;
+        return lightOrange;
     }
   }
 
@@ -735,7 +723,7 @@ void _connectToWebSocket() async {
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [blueGradientStart, blueGradientEnd],
+                colors: [orangeGradientStart, orangeGradientEnd],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -744,7 +732,7 @@ void _connectToWebSocket() async {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Toxic Avenger",
+                  "X-DEMON",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -761,7 +749,7 @@ void _connectToWebSocket() async {
           const SizedBox(height: 16),
           if (role == "reseller" || role == "owner")
             _buildDrawerItem(
-              icon: Icons.store,
+              icon: FontAwesomeIcons.store,
               label: "Seller Page",
               onTap: () {
                 Navigator.pop(context);
@@ -770,7 +758,7 @@ void _connectToWebSocket() async {
             ),
           if (role == "owner")
             _buildDrawerItem(
-              icon: Icons.admin_panel_settings,
+              icon: FontAwesomeIcons.userShield,
               label: "Admin Page",
               onTap: () {
                 Navigator.pop(context);
@@ -779,7 +767,7 @@ void _connectToWebSocket() async {
             ),
           const Divider(color: Colors.white24),
           _buildDrawerItem(
-            icon: Icons.logout,
+            icon: FontAwesomeIcons.signOutAlt,
             label: "Logout",
             onTap: () async {
               final prefs = await SharedPreferences.getInstance();
@@ -828,7 +816,7 @@ void _connectToWebSocket() async {
     required VoidCallback onTap,
   }) {
     return ListTile(
-      leading: Icon(icon, color: accentBlue),
+      leading: Icon(icon, color: accentOrange),
       title: Text(
         label,
         style: const TextStyle(color: Colors.white),
@@ -853,7 +841,7 @@ void _connectToWebSocket() async {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: accentBlue,
+                color: accentOrange,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -868,17 +856,17 @@ void _connectToWebSocket() async {
             ),
             const SizedBox(height: 24),
             _infoCard(FontAwesomeIcons.user, "Username", username),
-            _infoCard(FontAwesomeIcons.calendar, "Expired", expiredDate),
+            _infoCard(FontAwesomeIcons.calendarAlt, "Expired", expiredDate),
             _infoCard(FontAwesomeIcons.shieldAlt, "Role", role),
             const SizedBox(height: 24),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    icon: const Icon(Icons.lock_reset, color: Colors.white),
+                    icon: const Icon(FontAwesomeIcons.lock, color: Colors.white),
                     label: const Text("Change Password"),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: accentBlue,
+                      backgroundColor: accentOrange,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -902,7 +890,7 @@ void _connectToWebSocket() async {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton.icon(
-                    icon: const Icon(Icons.logout, color: Colors.white),
+                    icon: const Icon(FontAwesomeIcons.signOutAlt, color: Colors.white),
                     label: const Text("Logout"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade700,
@@ -939,17 +927,17 @@ void _connectToWebSocket() async {
       decoration: BoxDecoration(
         color: cardDark,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accentBlue.withOpacity(0.3)),
+        border: Border.all(color: accentOrange.withOpacity(0.3)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: accentBlue.withOpacity(0.2),
+              color: accentOrange.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: accentBlue),
+            child: Icon(icon, color: accentOrange),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -985,7 +973,7 @@ void _connectToWebSocket() async {
       backgroundColor: primaryDark,
       appBar: AppBar(
         title: const Text(
-          "Toxic Avenger",
+          "X-DEMON",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -996,11 +984,11 @@ void _connectToWebSocket() async {
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+            icon: const Icon(FontAwesomeIcons.bell, color: Colors.white),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.account_circle, color: Colors.white),
+            icon: const Icon(FontAwesomeIcons.userCircle, color: Colors.white),
             onPressed: _showAccountMenu,
           ),
         ],
@@ -1020,33 +1008,32 @@ void _connectToWebSocket() async {
         ),
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
-          selectedItemColor: accentBlue,
+          selectedItemColor: accentOrange,
           unselectedItemColor: Colors.white54,
           currentIndex: _selectedTabIndex,
           onTap: _onTabTapped,
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
+              icon: Icon(FontAwesomeIcons.home),
+              activeIcon: Icon(FontAwesomeIcons.home),
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.message_outlined),
-              activeIcon: Icon(Icons.message),
+              icon: Icon(FontAwesomeIcons.whatsapp),
+              activeIcon: Icon(FontAwesomeIcons.whatsapp),
               label: "WhatsApp",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.build_outlined),
-              activeIcon: Icon(Icons.build),
+              icon: Icon(FontAwesomeIcons.tools),
+              activeIcon: Icon(FontAwesomeIcons.tools),
               label: "Tools",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.movie_filter_outlined),
-              activeIcon: Icon(Icons.movie_filter),
+              icon: Icon(FontAwesomeIcons.film),
+              activeIcon: Icon(FontAwesomeIcons.film),
               label: "Anime",
             ),
-
           ],
         ),
       ),
@@ -1111,7 +1098,7 @@ class _NewsMediaState extends State<NewsMedia> {
       } else {
         return Center(
           child: CircularProgressIndicator(
-            color: Color(0xFF3B82F6),
+            color: Color(0xFFF63B3B),
           ),
         );
       }
@@ -1121,7 +1108,7 @@ class _NewsMediaState extends State<NewsMedia> {
         fit: BoxFit.cover,
         errorBuilder: (_, __, ___) => Container(
           color: Colors.grey.shade800,
-          child: const Icon(Icons.error, color: Color(0xFF3B82F6)),
+          child: const Icon(FontAwesomeIcons.exclamationTriangle, color: Color(0xFFF63B3B)),
         ),
       );
     }

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dashboard_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
   final String username;
@@ -98,7 +99,6 @@ class _SplashScreenState extends State<SplashScreen>
       body: Stack(
         alignment: Alignment.center,
         children: [
-          // Video di dalam Card dengan efek glass
           if (_videoController.value.isInitialized)
             Center(
               child: ClipRRect(
@@ -133,11 +133,10 @@ class _SplashScreenState extends State<SplashScreen>
           else
             const Center(child: CircularProgressIndicator()),
 
-          // Teks XX-O-25
           Positioned(
             bottom: 80,
             child: Text(
-              "Toxic Avenger",
+              "X-DEMON",
               style: TextStyle(
                 fontSize: 42,
                 fontWeight: FontWeight.bold,
@@ -145,7 +144,7 @@ class _SplashScreenState extends State<SplashScreen>
                 letterSpacing: 3,
                 shadows: [
                   Shadow(
-                    color: Colors.redAccent.withOpacity(0.9),
+                    color: Color(0xFFFF9800).withOpacity(0.9),
                     blurRadius: 10,
                     offset: const Offset(2, 2),
                   ),
@@ -159,7 +158,34 @@ class _SplashScreenState extends State<SplashScreen>
             ),
           ),
 
-          // Fade out effect
+          Positioned(
+            top: 60,
+            child: Icon(
+              FontAwesomeIcons.fire,
+              color: Color(0xFFFF9800),
+              size: 50,
+            ),
+          ),
+
+          Positioned(
+            top: 60,
+            right: 30,
+            child: Icon(
+              FontAwesomeIcons.shieldHalved,
+              color: Color(0xFFFF5722),
+              size: 50,
+            ),
+          ),
+
+          Positioned(
+            bottom: 150,
+            child: Icon(
+              FontAwesomeIcons.users,
+              color: Color(0xFFFF9800),
+              size: 40,
+            ),
+          ),
+
           if (_fadeOutStarted)
             FadeTransition(
               opacity: _fadeController.drive(Tween(begin: 1.0, end: 0.0)),
